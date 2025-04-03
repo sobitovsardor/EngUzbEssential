@@ -58,7 +58,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" Background="Transparent" BorderThickness="0" Cursor="Hand" Click="BackButton_Click">
-                            <StackPanel Orientation="Horizontal"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M 10,0 L 0,10 L 10,20" Stroke="#24284A" StrokeThickness="2" 
+                                      VerticalAlignment="Center" Margin="5,0,5,0"
+                                      StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+                                <TextBlock Text="BACK" FontSize="14" FontWeight="SemiBold" 
+                                           Foreground="#24284A" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
                         </Button>
 
                         <TextBlock Grid.Column="1" Text="LEARN" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"
