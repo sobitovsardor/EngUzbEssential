@@ -89,59 +89,62 @@
                             <Ellipse Width="24" Height="24" Fill="#D1434B" Margin="0,0,10,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
-                                <Button Content="HOME" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" FontWeight="Bold"/>
-                                <Button Content="LEARN" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0"/>
-                                <Button Content="GAMES" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0"/>
+                                <Button Content="HOME" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" FontWeight="Bold" Click="HomeButton_Click"/>
+                                <Button Content="LEARN" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" Click="LearnButton_Click"/>
+                                <Button Content="GAMES" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" Click="GamesButton_Click"/>
                                 <Button Content="LEADERBOARD" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0"/>
                             </StackPanel>
                         </StackPanel>
 
-                        <!-- Decorative Elements -->
-                        <Ellipse Width="20" Height="20" Fill="#D1434B" Opacity="0.7" Margin="400,200,0,0"/>
-                        <Path Data="M 0,0 L 10,10 L 0,10 Z" Fill="#24284A" Margin="300,100,0,0"/>
-                        <Ellipse Width="12" Height="12" Fill="#24284A" Opacity="0.7" Margin="150,350,0,0"/>
-                        <Path Data="M 0,0 L 10,10 L 0,10 Z" Fill="#D1434B" Margin="450,300,0,0"/>
+                        <!-- Content Frame to display pages -->
+                        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0"/>
 
-                        <!-- Main Content -->
-                        <StackPanel VerticalAlignment="Center" Margin="0,50,40,0">
-                            <TextBlock Text="English-Uzbek" FontSize="72" FontWeight="Bold" Foreground="#24284A"
-                                       FontFamily="Comic Sans MS" Width="538"/>
-                            <TextBlock Text="Essential" FontSize="72" FontWeight="Bold" Foreground="#24284A" 
-                                       Margin="0,-20,0,20" FontFamily="Comic Sans MS" Width="538"/>
+                        <!-- Home Content - Will be hidden when navigating to other pages -->
+                        <Grid x:Name="HomeContent">
+                            <!-- Decorative Elements -->
+                            <Ellipse Width="20" Height="20" Fill="#D1434B" Opacity="0.7" Margin="400,200,0,0"/>
+                            <Path Data="M 0,0 L 10,10 L 0,10 Z" Fill="#24284A" Margin="300,100,0,0"/>
+                            <Ellipse Width="12" Height="12" Fill="#24284A" Opacity="0.7" Margin="150,350,0,0"/>
+                            <Path Data="M 0,0 L 10,10 L 0,10 Z" Fill="#D1434B" Margin="450,300,0,0"/>
 
-                            <TextBlock Text="Learning a language opens doors to enhanced communication, cultural understanding, and cognitive benefits, ultimately enriching personal and professional lives by expanding opportunities and fostering empathy. " 
-                                       Foreground="#666A7A" TextWrapping="Wrap" MaxWidth="450" Margin="0,0,73,30" Width="463"/>
+                            <!-- Main Content -->
+                            <StackPanel VerticalAlignment="Center" Margin="0,50,40,0">
+                                <TextBlock Text="English-Uzbek" FontSize="72" FontWeight="Bold" Foreground="#24284A"
+                                        FontFamily="Comic Sans MS" Width="538"/>
+                                <TextBlock Text="Essential" FontSize="72" FontWeight="Bold" Foreground="#24284A" 
+                                        Margin="0,-20,0,20" FontFamily="Comic Sans MS" Width="538"/>
 
-                            <Button Style="{StaticResource ActionButtonStyle}" HorizontalAlignment="Left" Width="130" Click="Button_Click" Margin="29,0,0,0" RenderTransformOrigin="0.13,0.515">
-                                <StackPanel Orientation="Horizontal" Margin="-136,0,0,0">
-                                    <TextBlock Text="Get Started" RenderTransformOrigin="0.611,0.602" Width="87" Height="19" HorizontalAlignment="Right" Margin="136,0,0,0"/>
-                                    <Path Data="M0,0 L8,8 L0,16" Stroke="#24284A" StrokeThickness="2" 
-                                          VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
+                                <TextBlock Text="Learning a language opens doors to enhanced communication, cultural understanding, and cognitive benefits, ultimately enriching personal and professional lives by expanding opportunities and fostering empathy. " 
+                                        Foreground="#666A7A" TextWrapping="Wrap" MaxWidth="450" Margin="0,0,73,30" Width="463"/>
 
-                        <!-- Decorative Side Elements -->
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,150,0,0">
-                            <Line X1="0" Y1="0" X2="0" Y2="200" Stroke="#24284A" StrokeThickness="1" Opacity="0.5"/>
-                            <TextBlock Text="ENG-UZB ESSENTIAL" Foreground="#24284A" 
-                                       FontSize="10" FontWeight="SemiBold" Margin="0,17,3,0">
-                                <TextBlock.LayoutTransform>
-                                    <RotateTransform Angle="-90"/>
-                                </TextBlock.LayoutTransform>
-                            </TextBlock>
-                            <Line X1="0" Y1="0" X2="0" Y2="200" Stroke="#24284A" StrokeThickness="1" Opacity="0.5" Margin="0,20,0,0"/>
-                        </StackPanel>
+                                <Button Style="{StaticResource ActionButtonStyle}" HorizontalAlignment="Left" Width="130" Click="Button_Click" Margin="29,0,0,0" RenderTransformOrigin="0.13,0.515">
+                                    <StackPanel Orientation="Horizontal" Margin="-136,0,0,0">
+                                        <TextBlock Text="Get Started" RenderTransformOrigin="0.611,0.602" Width="87" Height="19" HorizontalAlignment="Right" Margin="136,0,0,0"/>
+                                        <Path Data="M0,0 L8,8 L0,16" Stroke="#24284A" StrokeThickness="2" 
+                                            VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- Decorative Side Elements -->
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,150,0,0">
+                                <Line X1="0" Y1="0" X2="0" Y2="200" Stroke="#24284A" StrokeThickness="1" Opacity="0.5"/>
+                                <TextBlock Text="ENG-UZB ESSENTIAL" Foreground="#24284A" 
+                                        FontSize="10" FontWeight="SemiBold" Margin="0,17,3,0">
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="-90"/>
+                                    </TextBlock.LayoutTransform>
+                                </TextBlock>
+                                <Line X1="0" Y1="0" X2="0" Y2="200" Stroke="#24284A" StrokeThickness="1" Opacity="0.5" Margin="0,20,0,0"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
 
                     <!-- Right Image Section -->
                     <Grid Grid.Column="1" Width="500">
                         <Border>
                             <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#A5B9D9" Offset="0"/>
-                                    <GradientStop Color="#C0D0E9" Offset="1"/>
-                                </LinearGradientBrush>
+                                <ImageBrush ImageSource="/Assets/Images/image1.jpg" Stretch="UniformToFill"/>
                             </Border.Background>
                         </Border>
 
