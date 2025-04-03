@@ -8,5 +8,22 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove="Assets\Images\image1.jpg" />
+	  <None Remove="Assets\Images\image2.jpg" />
+	  <None Remove="Assets\Images\image3.jpg" />
+	  <None Remove="Assets\Images\image4.jpg" />
+	  <None Remove="Assets\Images\image5.jpg" />
+	  <None Remove="Assets\Images\image6.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Assets\Images\image1.jpg" />
+	  <Resource Include="Assets\Images\image2.jpg" />
+	  <Resource Include="Assets\Images\image3.jpg" />
+	  <Resource Include="Assets\Images\image4.jpg" />
+	  <Resource Include="Assets\Images\image5.jpg" />
+	  <Resource Include="Assets\Images\image6.jpg" />
+	</ItemGroup>
 
 </Project>
