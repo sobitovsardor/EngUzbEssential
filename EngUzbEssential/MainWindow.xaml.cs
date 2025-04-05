@@ -59,7 +59,7 @@ namespace EngUzbEssential
             ShowNotification("Welcome to Eng-Uzb Essential!", NotificationType.Success);
         }
         
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             // Cancel the default closing behavior
             e.Cancel = true;
@@ -235,7 +235,7 @@ namespace EngUzbEssential
                            (b.Content.ToString() == "HOME" || 
                             b.Content.ToString() == "LEARN" || 
                             b.Content.ToString() == "GAMES" || 
-                            b.Content.ToString() == "LEADERBOARD"))
+                            b.Content.ToString() == "TRANSLATER"))
                     .ToList();
                 
                 int navDelay = 100;
@@ -406,16 +406,16 @@ namespace EngUzbEssential
         }
         
         // Helper method to find all children of a specific type
-        private IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        private IEnumerable<T> FindVisualChildren<T>(DependencyObject? depObj) where T : DependencyObject
         {
             if (depObj != null)
             {
                 for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
                 {
                     DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
+                    if (child != null && child is T t)
                     {
-                        yield return (T)child;
+                        yield return t;
                     }
 
                     foreach (T childOfChild in FindVisualChildren<T>(child))
@@ -785,8 +785,30 @@ namespace EngUzbEssential
                                "Navigation Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        
+        // Add this method to navigate to TranslaterPage with UI hidden
+        private void NavigateToTranslaterPageWithHiddenUI()
+        {
+            try
+            {
+                // Create the translator page with UI hidden option
+                var translaterPage = new Page.TranslaterPage
+                {
+                    ShouldHideUI = true
+                };
+                
+                // Navigate to the page
+                MainFrame.Navigate(translaterPage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error navigating to Translater page: {ex.Message}", 
+                              "Navigation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
-        private void UserProfileButton_Click(object sender, RoutedEventArgs e)
+        // Fix the TranslaterButton_Click method that was incorrectly replaced
+        private void TranslaterButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -798,41 +820,153 @@ namespace EngUzbEssential
                     return;
                 }
                 
-                // First create the page
-                var profilePage = new Page.UserProfilePage();
+                System.Diagnostics.Debug.WriteLine("Creating TranslaterPage instance...");
                 
-                // Then navigate to it
-                MainFrame.Navigate(profilePage);
+                // Create the Translater page with detailed error handling
+                Page.TranslaterPage? translaterPage = null;
+                try
+                {
+                    // Create the translator page
+                    translaterPage = new Page.TranslaterPage();
+                    System.Diagnostics.Debug.WriteLine("TranslaterPage created successfully");
+                    
+                    // Option to hide UI if needed (set to false by default)
+                    // translaterPage.ShouldHideUI = true; // Uncomment to hide UI
+                }
+                catch (Exception ex)
+                {
+                    string detailedError = $"Error type: {ex.GetType().Name}\nMessage: {ex.Message}\nStack trace: {ex.StackTrace}";
+                    System.Diagnostics.Debug.WriteLine($"Error creating TranslaterPage: {detailedError}");
+                    
+                    MessageBox.Show($"Error creating Translater page:\n{ex.Message}\n\nPlease check the application logs for more details.", 
+                                  "Page Creation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Safety check
+                if (translaterPage == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("TranslaterPage is null after creation");
+                    MessageBox.Show("Failed to create Translater page.", "Page Creation Error", 
+                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 
-                // Apply animation transition with fade only for a subtle effect
-                ApplyPageTransition(profilePage, TransitionType.FadeOnly);
+                System.Diagnostics.Debug.WriteLine("Navigating to TranslaterPage...");
                 
-                // Basic visibility changes
+                // Navigate to the Translater page
+                MainFrame.Navigate(translaterPage);
+                
+                // Apply animation transition with try-catch
+                try
+                {
+                    ApplyPageTransition(translaterPage, TransitionType.SlideFromRight);
+                }
+                catch (Exception animEx)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Animation error: {animEx.Message}");
+                    // If animation fails, use direct transition
+                    if (translaterPage != null)
+                    {
+                        translaterPage.Opacity = 1;
+                    }
+                }
+                
+                // Hide the home content
                 if (HomeContent != null)
+                {
                     HomeContent.Visibility = Visibility.Collapsed;
-                    
-                MainFrame.Visibility = Visibility.Visible;
+                }
                 
-                // Find the right panel using Grid.Column property
-                var rightPanel = this.FindName("RightPanel") as UIElement;
-                if (rightPanel != null)
-                    rightPanel.Visibility = Visibility.Collapsed;
+                // Hide the right blue panel with detailed error handling
+                try
+                {
+                    var parentGrid = MainFrame.Parent as FrameworkElement;
+                    if (parentGrid == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("MainFrame.Parent is null");
+                    }
                     
-                // Make the content take full width
-                Grid? parentGrid = MainFrame.Parent as Grid;
-                if (parentGrid != null)
-                    Grid.SetColumnSpan(parentGrid, 2);
+                    while (parentGrid != null && !(parentGrid is Grid grid && grid.ColumnDefinitions.Count > 1))
+                    {
+                        parentGrid = parentGrid.Parent as FrameworkElement;
+                    }
+                    
+                    if (parentGrid is Grid parentContentGrid)
+                    {
+                        // Find the right panel (column 1) and hide it
+                        var rightPanel = parentContentGrid.Children.Cast<UIElement>()
+                            .FirstOrDefault(x => Grid.GetColumn(x) == 1);
+                        
+                        if (rightPanel != null)
+                        {
+                            rightPanel.Visibility = Visibility.Collapsed;
+                            System.Diagnostics.Debug.WriteLine("Hidden right panel using grid column lookup");
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("Could not find right panel in grid children");
+                        }
+                        
+                        // Make the main frame span both columns
+                        var mainFrameParent = MainFrame.Parent as UIElement;
+                        if (mainFrameParent != null)
+                        {
+                            Grid.SetColumnSpan(mainFrameParent, 2);
+                            System.Diagnostics.Debug.WriteLine("Set column span for MainFrame.Parent");
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("MainFrame.Parent is not a UIElement");
+                        }
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Could not find parent grid with columns");
+                    }
+                }
+                catch (Exception layoutEx)
+                {
+                    // If layout adjustment fails, log but continue
+                    System.Diagnostics.Debug.WriteLine($"Layout adjustment error: {layoutEx.Message}\n{layoutEx.StackTrace}");
+                    
+                    // Try a simpler approach - directly access RightPanel
+                    if (RightPanel != null)
+                    {
+                        RightPanel.Visibility = Visibility.Collapsed;
+                        System.Diagnostics.Debug.WriteLine("Hidden right panel using direct RightPanel reference");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("RightPanel is null");
+                    }
+                }
+                
+                // Show the frame
+                MainFrame.Visibility = Visibility.Visible;
+                System.Diagnostics.Debug.WriteLine("Navigation to TranslaterPage completed successfully");
             }
             catch (Exception ex)
             {
-                // More detailed error handling
+                // Comprehensive error handling
                 string errorDetails = $"Error type: {ex.GetType().Name}\nMessage: {ex.Message}";
                 if (ex.InnerException != null)
                     errorDetails += $"\nInner exception: {ex.InnerException.Message}";
                 
-                MessageBox.Show($"Error navigating to profile page:\n{errorDetails}", 
+                System.Diagnostics.Debug.WriteLine($"CRITICAL ERROR in TranslaterButton_Click: {errorDetails}\nStack trace: {ex.StackTrace}");
+                
+                MessageBox.Show($"Error navigating to Translater page:\n{errorDetails}", 
                                "Navigation Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        // Call this method to open translator with hidden UI
+        // You can wire this to a separate button or command as needed
+
+        private void UserProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            // This button is currently disabled
+            // No action will be taken when clicked
         }
 
         /// <summary>
@@ -843,6 +977,13 @@ namespace EngUzbEssential
             // Don't animate if page is null
             if (page == null)
                 return;
+                
+            // For Direct transitions, just make the page visible without animation
+            if (transitionType == TransitionType.Direct)
+            {
+                page.Opacity = 1;
+                return;
+            }
                 
             try
             {
@@ -922,11 +1063,12 @@ namespace EngUzbEssential
         /// </summary>
         public enum TransitionType
         {
-            FadeOnly,      // Simple fade in
-            SlideAndFade,  // Fade in + slide up
-            SlideUp,       // Slide up only
-            SlideFromRight, // Slide in from right
-            SlideFromTop    // Slide in from top
+            SlideAndFade,
+            SlideUp,
+            SlideFromRight,
+            FadeOnly,
+            Direct, // No animations, direct page change
+            SlideFromTop  // Slide in from top
         }
 
         // Method to clear Get Started navigation and return to home
@@ -1266,7 +1408,7 @@ namespace EngUzbEssential
                 };
                 
                 // Add the canvas to the window
-                Grid mainGrid = this.Content as Grid;
+                Grid? mainGrid = this.Content as Grid;
                 if (mainGrid != null)
                 {
                     // Insert at the bottom of the z-order
@@ -1400,7 +1542,11 @@ namespace EngUzbEssential
                     else
                     {
                         // For other containers, use the Margin as an approximation
-                        Thickness margin = (element as FrameworkElement)?.Margin ?? new Thickness();
+                        Thickness margin = new Thickness();
+                        if (element is FrameworkElement frameworkElement)
+                        {
+                            margin = frameworkElement.Margin;
+                        }
                         position.X = margin.Left;
                         position.Y = margin.Top;
                     }
@@ -2122,7 +2268,7 @@ namespace EngUzbEssential
                 if (e.AddedItems.Count > 0)
                 {
                     // Find the TabItem
-                    TabItem newTab = null;
+                    TabItem? newTab = null;
                     
                     // Try to get the TabItem directly if it's in AddedItems
                     if (e.AddedItems[0] is TabItem tabItem)
@@ -2508,11 +2654,16 @@ namespace EngUzbEssential
                     Storyboard storyboard = new Storyboard();
                     
                     // Pulse scale animation
-                    ScaleTransform scaleTransform;
+                    ScaleTransform? scaleTransform;
                     
                     if (selectedContainer.RenderTransform is TransformGroup group)
                     {
                         scaleTransform = group.Children.OfType<ScaleTransform>().FirstOrDefault();
+                        if (scaleTransform == null)
+                        {
+                            scaleTransform = new ScaleTransform(1.0, 1.0);
+                            group.Children.Add(scaleTransform);
+                        }
                     }
                     else
                     {
@@ -2558,6 +2709,76 @@ namespace EngUzbEssential
                     storyboard.Begin();
                 }
             };
+        }
+
+        private void LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Check if MainFrame exists
+                if (MainFrame == null)
+                {
+                    MessageBox.Show("Navigation frame not found.", "Navigation Error", 
+                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                
+                // Create and navigate to the LeaderboardPage
+                var leaderboardPage = new Page.LeaderboardPage();
+                MainFrame.Navigate(leaderboardPage);
+                
+                // Apply animation transition
+                ApplyPageTransition(leaderboardPage, TransitionType.SlideFromRight);
+                
+                // Hide home content
+                if (HomeContent != null)
+                    HomeContent.Visibility = Visibility.Collapsed;
+                
+                // Show the main frame
+                MainFrame.Visibility = Visibility.Visible;
+                
+                // Find the right panel and hide it
+                var rightPanel = this.FindName("RightPanel") as UIElement;
+                if (rightPanel != null)
+                    rightPanel.Visibility = Visibility.Collapsed;
+                
+                // Make the content take full width
+                Grid? parentGrid = MainFrame.Parent as Grid;
+                if (parentGrid != null)
+                    Grid.SetColumnSpan(parentGrid, 2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error navigating to leaderboard: {ex.Message}", 
+                               "Navigation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                // Find the button and update its content
+                if (sender is Button button)
+                {
+                    button.Content = "\uE922"; // Maximize icon
+                }
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+                // Find the button and update its content
+                if (sender is Button button)
+                {
+                    button.Content = "\uE923"; // Restore icon
+                }
+            }
         }
     }
 }

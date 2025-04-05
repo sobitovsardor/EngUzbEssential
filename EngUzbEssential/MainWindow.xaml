@@ -13,6 +13,49 @@
         AllowsTransparency="True">
 
     <Window.Resources>
+        <!-- Window Control Button Style -->
+        <Style x:Key="WindowControlButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E5E5E5"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#D0D0D0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Close Button Style -->
+        <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource WindowControlButtonStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E81123"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#8C0A15"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="MenuButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#24284A"/>
@@ -75,7 +118,37 @@
 
     <Border Background="#FFEDB3" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
-            <Border Margin="20" Background="White" CornerRadius="24">
+            <!-- Header Bar -->
+            <Border Height="36" VerticalAlignment="Top" Background="Transparent" >
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2"/>
+                </Border.Effect>
+            </Border>
+
+            <!-- Window Control Buttons -->
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,5,0">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MinimizeButton" Style="{StaticResource WindowControlButtonStyle}" 
+                            Content="&#xE921;" Click="MinimizeButton_Click" 
+                            Foreground="Black"
+                            ToolTip="Minimize"/>
+                    <Button x:Name="MaximizeButton" Style="{StaticResource WindowControlButtonStyle}" 
+                            Content="&#xE922;" Click="MaximizeButton_Click" 
+                            Foreground="Black"
+                            ToolTip="Maximize"/>
+                    <Button x:Name="CloseAppButton" Style="{StaticResource CloseButtonStyle}" 
+                            Content="&#xE8BB;" Click="CloseButton_Click" 
+                            Foreground="Black"
+                            ToolTip="Close"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- App Title -->
+            <TextBlock Text="EngUzbEssential" Foreground="Black" FontSize="12" 
+                       VerticalAlignment="Top" HorizontalAlignment="Left" 
+                       Margin="10,10,0,0" FontWeight="SemiBold"/>
+
+            <Border Margin="20,36,20,20" Background="White" CornerRadius="24">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -125,15 +198,17 @@
                                 <Button Content="HOME" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" FontWeight="Bold" Click="HomeButton_Click"/>
                                 <Button Content="LEARN" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" Click="LearnButton_Click"/>
                                 <Button Content="GAMES" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" Click="GamesButton_Click"/>
-                                <Button Content="LEADERBOARD" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0"/>
+                                <Button Content="TRANSLATER" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" Click="TranslaterButton_Click"/>
+                                <Button Content="LEADERBOARD" Style="{StaticResource MenuButtonStyle}" Margin="0,0,20,0" Click="LeaderboardButton_Click"/>
                             </StackPanel>
                         </StackPanel>
 
                         <!-- Content Frame to display pages -->
-                        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0"/>
+                        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0" 
+                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
                         <!-- Home Content - Will be hidden when navigating to other pages -->
-                        <Grid x:Name="HomeContent">
+                        <Grid x:Name="HomeContent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0">
                             <!-- Decorative Elements -->
                             <Ellipse Width="20" Height="20" Fill="#D1434B" Opacity="0.7" Margin="400,200,0,0"/>
                             <Path Data="M 0,0 L 10,10 L 0,10 Z" Fill="#24284A" Margin="300,100,0,0"/>
@@ -141,17 +216,17 @@
                             <Path Data="M 0,0 L 10,10 L 0,10 Z" Fill="#D1434B" Margin="450,300,0,0"/>
 
                             <!-- Main Content -->
-                            <StackPanel VerticalAlignment="Center" Margin="0,50,40,0">
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="531" Margin="33,80,0,0">
                                 <TextBlock Text="English-Uzbek" FontSize="72" FontWeight="Bold" Foreground="#24284A"
-                                        FontFamily="Comic Sans MS" Width="538"/>
+                                        FontFamily="Comic Sans MS"/>
                                 <TextBlock Text="Essential" FontSize="72" FontWeight="Bold" Foreground="#24284A" 
-                                        Margin="0,-20,0,20" FontFamily="Comic Sans MS" Width="538"/>
+                                        Margin="0,-20,0,20" FontFamily="Comic Sans MS" Width="543"/>
 
-                                <TextBlock Text="Learning a language opens doors to enhanced communication, cultural understanding, and cognitive benefits, ultimately enriching personal and professional lives by expanding opportunities and fostering empathy. " 
-                                        Foreground="#666A7A" TextWrapping="Wrap" MaxWidth="450" Margin="0,0,73,30" Width="463"/>
+                                <TextBlock Text="Learning a language opens doors to enhanced communication, cultural understanding, and cognitive benefits, ultimately enriching personal and professional lives by expanding opportunities and fostering empathy." 
+                                        Foreground="#666A7A" TextWrapping="Wrap" MaxWidth="650" Margin="0,0,0,30"/>
 
                                 <!-- Get Started Button -->
-                                <Button Style="{StaticResource ActionButtonStyle}" HorizontalAlignment="Left" Width="160" Click="Button_Click" Margin="20,0,0,0">
+                                <Button Style="{StaticResource ActionButtonStyle}" HorizontalAlignment="Left" Width="127" Click="Button_Click" Margin="0,0,0,0" RenderTransformOrigin="0.331,0.603">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Get Started" FontWeight="SemiBold"/>
                                         <Path Data="M0,0 L8,8 L0,16" Stroke="#24284A" StrokeThickness="2" 
@@ -161,7 +236,7 @@
                             </StackPanel>
 
                             <!-- Decorative Side Elements -->
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,150,0,0">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,60,0,0">
                                 <Line X1="0" Y1="0" X2="0" Y2="200" Stroke="#24284A" StrokeThickness="1" Opacity="0.5"/>
                                 <TextBlock Text="ENG-UZB ESSENTIAL" Foreground="#24284A" 
                                         FontSize="10" FontWeight="SemiBold" Margin="0,17,3,0">
@@ -178,78 +253,65 @@
                     <Grid Grid.Column="1" Width="500" x:Name="RightPanel">
                         <Border>
                             <Border.Background>
-                                <ImageBrush ImageSource="/Assets/Images/image1.jpg" Stretch="UniformToFill"/>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#4285F4" Offset="0"/>
+                                    <GradientStop Color="#34A853" Offset="1"/>
+                                </LinearGradientBrush>
                             </Border.Background>
                         </Border>
 
-                        <!-- Spider Web Pattern -->
-                        <Path Stroke="#D1434B" StrokeThickness="0.5" Opacity="0.8" 
-                              Data="M 500,0 C 400,100 300,150 200,200 C 100,250 50,300 0,400 M 500,50 C 400,125 300,175 200,225 C 100,275 50,325 0,425 M 500,100 C 400,150 300,200 200,250 C 100,300 50,350 0,450 M 500,150 C 400,175 300,225 200,275 C 100,325 50,375 0,475 M 0,0 C 100,100 200,150 300,200 C 400,250 450,300 500,400 M 0,50 C 100,125 200,175 300,225 C 400,275 450,325 500,425 M 0,100 C 100,150 200,200 300,250 C 400,300 450,350 500,450 M 0,150 C 100,175 200,225 300,275 C 400,325 450,375 500,475"/>
+                        <!-- Decorative Elements -->
+                        <Canvas>
+                            <!-- Circular Elements -->
+                            <Ellipse Fill="#FFFFFF" Opacity="0.05" Width="300" Height="300" Canvas.Left="-50" Canvas.Top="200"/>
+                            <Ellipse Fill="#FFFFFF" Opacity="0.07" Width="200" Height="200" Canvas.Left="350" Canvas.Top="50"/>
+                            <Ellipse Fill="#FFFFFF" Opacity="0.08" Width="150" Height="150" Canvas.Left="300" Canvas.Top="400"/>
+
+                            <!-- Abstract Lines -->
+                            <Path Stroke="#FFFFFF" StrokeThickness="0.8" Opacity="0.15"
+                                Data="M 0,100 C 100,80 200,150 300,100 C 400,50 450,120 500,80"/>
+                            <Path Stroke="#FFFFFF" StrokeThickness="0.8" Opacity="0.15"
+                                Data="M 0,200 C 100,180 200,250 300,200 C 400,150 450,220 500,180"/>
+                            <Path Stroke="#FFFFFF" StrokeThickness="0.8" Opacity="0.15"
+                                Data="M 0,300 C 100,280 200,350 300,300 C 400,250 450,320 500,280"/>
+                        </Canvas>
+
+                        <!-- Text Elements -->
+                        <StackPanel VerticalAlignment="Center" Margin="50,0">
+                            <TextBlock Text="Enhance Your" FontWeight="Light" FontSize="28" Foreground="#FFFFFF" Opacity="0.9" TextAlignment="Left"/>
+                            <TextBlock Text="LANGUAGE SKILLS" FontWeight="Bold" FontSize="38" Foreground="#FFFFFF" TextAlignment="Left" Margin="0,0,0,20"/>
+                            <TextBlock Text="Learn English-Uzbek vocabulary, grammar, and more with our interactive platform" 
+                                    Foreground="#FFFFFF" Opacity="0.8" TextWrapping="Wrap" TextAlignment="Left" FontSize="16" Margin="0,0,0,30"/>
+
+                            <!-- Features List -->
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,5">
+                                    <Border Background="#FFFFFF" CornerRadius="10" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
+                                        <Path Data="M 5,10 L 8,14 L 15,6" Stroke="#4285F4" StrokeThickness="2" 
+                                            StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" Margin="3"/>
+                                    </Border>
+                                    <TextBlock Text="Interactive Lessons" Foreground="#FFFFFF" FontSize="15"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5">
+                                    <Border Background="#FFFFFF" CornerRadius="10" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
+                                        <Path Data="M 5,10 L 8,14 L 15,6" Stroke="#4285F4" StrokeThickness="2" 
+                                            StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" Margin="3"/>
+                                    </Border>
+                                    <TextBlock Text="Vocabulary Building" Foreground="#FFFFFF" FontSize="15"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5">
+                                    <Border Background="#FFFFFF" CornerRadius="10" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
+                                        <Path Data="M 5,10 L 8,14 L 15,6" Stroke="#4285F4" StrokeThickness="2" 
+                                            StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" Margin="3"/>
+                                    </Border>
+                                    <TextBlock Text="Progress Tracking" Foreground="#FFFFFF" FontSize="15"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
 
 
-                        <!-- Close Button -->
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,15,0" 
-                                Click="CloseButton_Click" Width="32" Height="32" Cursor="Hand">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#33000000"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="Button">
-                                                <Border x:Name="ButtonBorder" 
-                                                        Background="{TemplateBinding Background}" 
-                                                        CornerRadius="16"
-                                                        BorderThickness="0">
-                                                    <Border.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.3" Color="Black"/>
-                                                    </Border.Effect>
-                                                    <Grid>
-                                                        <Path x:Name="CrossPath" 
-                                                              Data="M 10,10 L 22,22 M 22,10 L 10,22" 
-                                                              Stroke="{TemplateBinding Foreground}" 
-                                                              StrokeThickness="1.5"
-                                                              StrokeEndLineCap="Round"
-                                                              StrokeStartLineCap="Round"
-                                                              HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center">
-                                                            <Path.RenderTransform>
-                                                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                                            </Path.RenderTransform>
-                                                        </Path>
-                                                    </Grid>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#E53935"/>
-                                                        <Setter Property="Foreground" Value="White"/>
-                                                        <Setter TargetName="CrossPath" Property="RenderTransform">
-                                                            <Setter.Value>
-                                                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                    <Trigger Property="IsPressed" Value="True">
-                                                        <Setter Property="Background" Value="#C62828"/>
-                                                        <Setter TargetName="ButtonBorder" Property="Effect">
-                                                            <Setter.Value>
-                                                                <DropShadowEffect ShadowDepth="0" BlurRadius="2" Opacity="0.2" Color="Black"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <!-- Add transitions for smoother hover effects -->
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
                     </Grid>
                 </Grid>
             </Border>

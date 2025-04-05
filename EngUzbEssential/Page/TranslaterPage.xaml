@@ -1,0 +1,520 @@
+<Page x:Class="EngUzbEssential.Page.TranslaterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EngUzbEssential.Page"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1200"
+      Title="TranslaterPage" Loaded="TranslaterPage_Loaded">
+
+    <Page.Resources>
+        <!-- Google-style Button Style -->
+        <Style x:Key="GoogleButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#5F6368"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="4" Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#F1F3F4"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E8EAED"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Google-style Action Button Style -->
+        <Style x:Key="GoogleActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#1A73E8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="shadowBorder" Background="#000000" Opacity="0.1"
+                                   CornerRadius="4" Margin="0,0,0,3">
+                            </Border>
+                            <Border x:Name="border" CornerRadius="4" Background="{TemplateBinding Background}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ContentPresenter.RenderTransform>
+                                        <ScaleTransform x:Name="contentScale" ScaleX="1" ScaleY="1" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="contentScale" 
+                                                       Storyboard.TargetProperty="ScaleX"
+                                                       To="1.05" Duration="0:0:0.1" />
+                                        <DoubleAnimation Storyboard.TargetName="contentScale" 
+                                                       Storyboard.TargetProperty="ScaleY"
+                                                       To="1.05" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="contentScale" 
+                                                       Storyboard.TargetProperty="ScaleX"
+                                                       To="1" Duration="0:0:0.1" />
+                                        <DoubleAnimation Storyboard.TargetName="contentScale" 
+                                                       Storyboard.TargetProperty="ScaleY"
+                                                       To="1" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1967D2"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#185ABC"/>
+                                <Setter TargetName="shadowBorder" Property="Opacity" Value="0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Google-style Language Select Style -->
+        <Style x:Key="GoogleLanguageSelectStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#202124"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        
+        <!-- Google-style Text Area Style -->
+        <Style x:Key="GoogleTextAreaStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#202124"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="24,20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+        
+        <!-- History Item Style -->
+        <Style x:Key="HistoryItemStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#E8EAED"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F8F9FA"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Sidebar Toggle Button Style -->
+        <Style x:Key="SidebarToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="#F1F3F4"/>
+            <Setter Property="Foreground" Value="#5F6368"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" Width="40" Height="40">
+                            <Path x:Name="icon" Data="M4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H16L12,22L8,18H4A2,2 0 0,1 2,16V4A2,2 0 0,1 4,2M4,4V16H8.83L12,19.17L15.17,16H20V4H4M16,11H8V9H16V11M16,7H8V5H16V7M16,15H8V13H16V15Z" 
+                                  Fill="{TemplateBinding Foreground}" Width="20" Height="20" Stretch="Uniform"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E8EAED"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="icon" Property="Fill" Value="#1A73E8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Interactive Change Button Style -->
+        <Style x:Key="ChangeButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#F1F3F4"/>
+            <Setter Property="Foreground" Value="#5F6368"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="18" Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E4E6E9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#DADCE0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Swap Languages Button Style -->
+        <Style x:Key="SwapButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#5F6368"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse x:Name="shadow" Fill="#000000" Opacity="0.08" Width="42" Height="42" Margin="0,2,0,0"/>
+                            <Ellipse x:Name="background" Fill="{TemplateBinding Background}" Width="42" Height="42"/>
+                            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="#F8F9FA"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="background" Property="Fill" Value="#F1F3F4"/>
+                                <Setter TargetName="shadow" Property="Opacity" Value="0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <Grid Grid.Row="0" Height="64" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Back Button -->
+            <Button Grid.Column="0" Margin="16,0,0,0" Style="{StaticResource GoogleButtonStyle}"
+                    Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="←" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Back" FontSize="14" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            
+            <!-- Title -->
+            <TextBlock Grid.Column="1" Text="Translator" FontSize="20" FontWeight="Medium" 
+                      Foreground="#202124" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            
+            <!-- Sidebar Toggle -->
+            <ToggleButton x:Name="SidebarToggle" Grid.Column="2" Margin="0,0,16,0" 
+                         Style="{StaticResource SidebarToggleButtonStyle}"
+                         Checked="SidebarToggle_Checked" Unchecked="SidebarToggle_Unchecked"/>
+        </Grid>
+        
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Main Translation Area -->
+            <Border Grid.Column="0" Background="#F1F3F4" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Main Translation Area (Google-like dual panel) -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Input Side -->
+                        <Border Grid.Column="0" Background="White" Margin="0,0,8,0" CornerRadius="8"
+                               BorderThickness="1" BorderBrush="#E8EAED">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Source Language Selector -->
+                                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#F1F3F4" Padding="24,8">
+                                    <ComboBox x:Name="FromLanguageComboBox" Style="{StaticResource GoogleLanguageSelectStyle}"
+                                             SelectedIndex="0" SelectionChanged="LanguageComboBox_SelectionChanged">
+                                        <ComboBoxItem Content="English"/>
+                                        <ComboBoxItem Content="Uzbek"/>
+                                    </ComboBox>
+                                </Border>
+                                
+                                <!-- Input Text Area -->
+                                <TextBox x:Name="InputTextBox" Grid.Row="1" Style="{StaticResource GoogleTextAreaStyle}"
+                                         TextChanged="InputTextBox_TextChanged" LostFocus="InputTextBox_LostFocus">
+                                    <TextBox.Tag>Type or paste text here</TextBox.Tag>
+                                </TextBox>
+                                
+                                <!-- Character Count -->
+                                <Border Grid.Row="2" Padding="24,8">
+                                    <Grid>
+                                        <TextBlock x:Name="CharacterCountTextBlock" Text="0/500 characters" 
+                                                  Foreground="#5F6368" FontSize="12" 
+                                                  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        
+                                        <!-- Input Tools -->
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <!-- Button removed -->
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        
+                        <!-- Output Side -->
+                        <Border Grid.Column="1" Background="White" Margin="8,0,0,0" CornerRadius="8"
+                                BorderThickness="1" BorderBrush="#E8EAED">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Target Language Selector -->
+                                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#F1F3F4" Padding="24,8">
+                                    <ComboBox x:Name="ToLanguageComboBox" Style="{StaticResource GoogleLanguageSelectStyle}"
+                                             SelectedIndex="1" SelectionChanged="LanguageComboBox_SelectionChanged">
+                                        <ComboBoxItem Content="English"/>
+                                        <ComboBoxItem Content="Uzbek"/>
+                                    </ComboBox>
+                                </Border>
+                                
+                                <!-- Output Text Area -->
+                                <TextBox x:Name="OutputTextBox" Grid.Row="1" Style="{StaticResource GoogleTextAreaStyle}"
+                                         IsReadOnly="True"/>
+                                
+                                <!-- Output Tools -->
+                                <Border Grid.Row="2" Padding="24,8">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Style="{StaticResource GoogleButtonStyle}" 
+                                                Click="CopyOutput_Click" Margin="4,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path Data="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" 
+                                                      Fill="#5F6368" Width="18" Height="18" Stretch="Uniform"/>
+                                                <TextBlock Text="Copy" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Style="{StaticResource GoogleButtonStyle}" 
+                                                Click="AddToFavorites_Click" Margin="4,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" 
+                                                      Fill="#5F6368" Width="18" Height="18" Stretch="Uniform"/>
+                                                <TextBlock Text="Save" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        
+                        <!-- Swap Languages Button -->
+                        <Button Style="{StaticResource SwapButtonStyle}"
+                                Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+                                VerticalAlignment="Top" Margin="0,44,0,0" Panel.ZIndex="100" 
+                                Click="SwapLanguages_Click">
+                            <Grid Width="24" Height="24">
+                                <!-- Up arrow -->
+                                <Path Data="M7,11L12,6L17,11H7Z" Fill="#4285F4" Stretch="Uniform"/>
+                                <!-- Down arrow -->
+                                <Path Data="M7,13L12,18L17,13H7Z" Fill="#4285F4" Stretch="Uniform"/>
+                                <!-- Horizontal line in the middle -->
+                                <Rectangle Fill="#4285F4" Width="10" Height="1.5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                        
+                        <!-- Translate Button (Enhanced) -->
+                        <Button Style="{StaticResource GoogleActionButtonStyle}" 
+                                Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                Margin="0,0,0,-20" Panel.ZIndex="100" Width="180" Height="50"
+                                Click="TranslateButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z" 
+                                      Fill="White" Width="20" Height="20" Stretch="Uniform" Margin="0,0,8,0"/>
+                                <TextBlock Text="Translate" FontSize="16"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+            
+            <!-- Sidebar Panel (History & Favorites) -->
+            <Border x:Name="SidebarPanel" Grid.Column="1" Width="0" 
+                   Background="White" BorderThickness="1,0,0,0" BorderBrush="#E8EAED">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Sidebar Header with Tabs -->
+                    <Grid Grid.Row="0" Background="White" Height="48">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- History Tab -->
+                        <RadioButton x:Name="HistoryTab" Grid.Column="0" Content="History" GroupName="SidebarTabs"
+                                    IsChecked="True" Checked="SidebarTab_Checked" Tag="History">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid>
+                                        <Border x:Name="border" Background="Transparent" Padding="8,0">
+                                            <TextBlock Text="{TemplateBinding Content}" 
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      Foreground="#5F6368" FontWeight="Medium" FontSize="14"/>
+                                        </Border>
+                                        <Border x:Name="indicator" Height="3" Background="#1A73E8" 
+                                               VerticalAlignment="Bottom" Visibility="Collapsed"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#F1F3F4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="indicator" Property="Visibility" Value="Visible"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+                        
+                        <!-- Favorites Tab -->
+                        <RadioButton x:Name="FavoritesTab" Grid.Column="1" Content="Favorites" GroupName="SidebarTabs"
+                                    Checked="SidebarTab_Checked" Tag="Favorites">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid>
+                                        <Border x:Name="border" Background="Transparent" Padding="8,0">
+                                            <TextBlock Text="{TemplateBinding Content}" 
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      Foreground="#5F6368" FontWeight="Medium" FontSize="14"/>
+                                        </Border>
+                                        <Border x:Name="indicator" Height="3" Background="#1A73E8" 
+                                               VerticalAlignment="Bottom" Visibility="Collapsed"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#F1F3F4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="indicator" Property="Visibility" Value="Visible"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+                    </Grid>
+                    
+                    <!-- Sidebar Content -->
+                    <Grid Grid.Row="1">
+                        <!-- History Content -->
+                        <ScrollViewer x:Name="HistoryContent">
+                            <StackPanel x:Name="HistoryList" Orientation="Vertical">
+                                <!-- Items will be added programmatically -->
+                                <TextBlock Text="Your translation history will appear here." 
+                                          Margin="16,24" Foreground="#5F6368" TextAlignment="Center"
+                                          FontSize="14" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        
+                        <!-- Favorites Content -->
+                        <ScrollViewer x:Name="FavoritesContent" Visibility="Collapsed">
+                            <StackPanel x:Name="FavoritesList" Orientation="Vertical">
+                                <!-- Items will be added programmatically -->
+                                <TextBlock Text="Your saved translations will appear here." 
+                                          Margin="16,24" Foreground="#5F6368" TextAlignment="Center"
+                                          FontSize="14" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+    
+    <!-- Animations for sidebar -->
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="ToggleButton.Checked" SourceName="SidebarToggle">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="SidebarPanel"
+                                   Storyboard.TargetProperty="Width"
+                                   To="320" Duration="0:0:0.3">
+                        <DoubleAnimation.EasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ToggleButton.Unchecked" SourceName="SidebarToggle">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="SidebarPanel"
+                                   Storyboard.TargetProperty="Width"
+                                   To="0" Duration="0:0:0.3">
+                        <DoubleAnimation.EasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+</Page> 

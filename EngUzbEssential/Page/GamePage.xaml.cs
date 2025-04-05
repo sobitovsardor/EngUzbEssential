@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,11 +16,18 @@ namespace EngUzbEssential.Page
         
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the main window
-            if (Application.Current.MainWindow is MainWindow mainWindow)
+            try
             {
                 // Navigate back to home
-                mainWindow.NavigateToHome();
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.NavigateToHome();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Navigation error: {ex.Message}", 
+                               "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

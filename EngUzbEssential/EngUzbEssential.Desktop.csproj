@@ -26,11 +26,6 @@
 	  <Resource Include="Assets\Images\image6.jpg" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Page\LoginRegisterPage.xaml.cs">
-	    <SubType>Code</SubType>
-	    <DependentUpon>LoginRegisterPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+	
 
 </Project>
