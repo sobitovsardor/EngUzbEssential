@@ -6,6 +6,7 @@
 		<TargetFramework>net8.0-windows8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
+		<RootNamespace>EngUzbEssential</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,6 +27,10 @@
 	  <Resource Include="Assets\Images\image6.jpg" />
 	</ItemGroup>
 
-	
+	<ItemGroup>
+	  <Compile Update="Windows\*.cs">
+		<DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 
 </Project>
