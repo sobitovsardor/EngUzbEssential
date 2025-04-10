@@ -14,21 +14,31 @@ namespace EngUzbEssential.Windows
         public LoginRegisterWindow()
         {
             InitializeComponent();
-            
+
             // Initialize with Login tab selected
             LoginTabButton.Foreground = new SolidColorBrush(Color.FromRgb(66, 133, 244));
-            
-            // Attach event handlers
-            CloseButton.Click += CloseButton_Click;
-            LoginTabButton.Click += LoginTabButton_Click;
-            RegisterTabButton.Click += RegisterTabButton_Click;
-            LoginButton.Click += LoginButton_Click;
-            RegisterButton.Click += RegisterButton_Click;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
         }
 
         private void LoginTabButton_Click(object sender, RoutedEventArgs e)
@@ -50,8 +60,8 @@ namespace EngUzbEssential.Windows
             RegisterTabButton.Foreground = new SolidColorBrush(Color.FromRgb(102, 106, 122));
 
             // Animate tab indicators
-            DoubleAnimation fadeIn = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
-            DoubleAnimation fadeOut = new DoubleAnimation(0, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation fadeIn = new(1, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation fadeOut = new(0, TimeSpan.FromSeconds(0.3));
             LoginTabIndicator.BeginAnimation(Border.OpacityProperty, fadeIn);
             RegisterTabIndicator.BeginAnimation(Border.OpacityProperty, fadeOut);
 
@@ -67,8 +77,8 @@ namespace EngUzbEssential.Windows
             RegisterTabButton.Foreground = new SolidColorBrush(Color.FromRgb(66, 133, 244));
 
             // Animate tab indicators
-            DoubleAnimation fadeIn = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
-            DoubleAnimation fadeOut = new DoubleAnimation(0, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation fadeIn = new(1, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation fadeOut = new(0, TimeSpan.FromSeconds(0.3));
             LoginTabIndicator.BeginAnimation(Border.OpacityProperty, fadeOut);
             RegisterTabIndicator.BeginAnimation(Border.OpacityProperty, fadeIn);
 
@@ -91,7 +101,7 @@ namespace EngUzbEssential.Windows
 
             // TODO: Implement actual authentication logic
             MessageBox.Show("Login successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            
+
             // Open the main window
             OpenMainWindow();
         }
@@ -104,7 +114,7 @@ namespace EngUzbEssential.Windows
             string password = RegisterPassword.Password;
             string confirmPassword = RegisterConfirmPassword.Password;
 
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) || 
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) ||
                 string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
             {
                 MessageBox.Show("Please fill out all fields.", "Registration Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -119,7 +129,7 @@ namespace EngUzbEssential.Windows
 
             // TODO: Implement actual registration logic
             MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            
+
             // Open the main window
             OpenMainWindow();
         }
@@ -127,9 +137,9 @@ namespace EngUzbEssential.Windows
         private void OpenMainWindow()
         {
             // Create and show the main window
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new();
             mainWindow.Show();
-            
+
             // Close the login window
             this.Close();
         }
