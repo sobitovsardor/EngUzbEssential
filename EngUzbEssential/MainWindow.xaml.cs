@@ -95,6 +95,7 @@ namespace EngUzbEssential
             Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleX)"));
             closingStoryboard.Children.Add(scaleXAnimation);
             
+
             DoubleAnimation scaleYAnimation = new DoubleAnimation
             {
                 From = 1,
