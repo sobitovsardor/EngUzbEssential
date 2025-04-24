@@ -160,7 +160,7 @@
                         <!-- Top Navigation -->
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
                             <!-- User Profile Button -->
-                            <Button Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="0" Click="UserProfileButton_Click">
+                            <Button Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="0" Click="UserProfileButton_Click" Width="161" Height="74">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent"/>
@@ -181,7 +181,7 @@
                                     </Style>
                                 </Button.Style>
                                 <StackPanel Orientation="Horizontal">
-                                    <Border Width="36" Height="36" CornerRadius="18" Margin="0,0,8,0">
+                                    <Border Width="53" Height="54" CornerRadius="18" Margin="0,0,8,0">
                                         <Border.Background>
                                             <ImageBrush ImageSource="/Assets/Images/image6.jpg" Stretch="UniformToFill"/>
                                         </Border.Background>
@@ -189,8 +189,14 @@
                                             <DropShadowEffect Color="#AAAAAA" BlurRadius="5" ShadowDepth="2" Opacity="0.3"/>
                                         </Border.Effect>
                                     </Border>
-                                    <TextBlock Text="John Smith" VerticalAlignment="Center" Foreground="#24284A" 
+                                    <StackPanel>
+                                        <TextBlock Text="John Smith" VerticalAlignment="Center" Foreground="#24284A" 
                                                FontWeight="SemiBold" FontSize="14"/>
+                                        <TextBlock Text="Points: 0" VerticalAlignment="Center" Foreground="#24284A" 
+                                               FontWeight="SemiBold" FontSize="12" Margin="0,2,0,0"/>
+                                        <TextBlock Text="Rating: 0" VerticalAlignment="Center" Foreground="#24284A" 
+                                               FontWeight="SemiBold" FontSize="12" Margin="0,1,0,0"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </Button>
 
@@ -204,8 +210,7 @@
                         </StackPanel>
 
                         <!-- Content Frame to display pages -->
-                        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0" 
-                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,66,0,0" />
 
                         <!-- Home Content - Will be hidden when navigating to other pages -->
                         <Grid x:Name="HomeContent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0">
@@ -249,69 +254,107 @@
                         </Grid>
                     </Grid>
 
-                    <!-- Right Image Section -->
-                    <Grid Grid.Column="1" Width="500" x:Name="RightPanel">
-                        <Border>
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#4285F4" Offset="0"/>
-                                    <GradientStop Color="#34A853" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
-
-                        <!-- Decorative Elements -->
-                        <Canvas>
-                            <!-- Circular Elements -->
-                            <Ellipse Fill="#FFFFFF" Opacity="0.05" Width="300" Height="300" Canvas.Left="-50" Canvas.Top="200"/>
-                            <Ellipse Fill="#FFFFFF" Opacity="0.07" Width="200" Height="200" Canvas.Left="350" Canvas.Top="50"/>
-                            <Ellipse Fill="#FFFFFF" Opacity="0.08" Width="150" Height="150" Canvas.Left="300" Canvas.Top="400"/>
-
-                            <!-- Abstract Lines -->
-                            <Path Stroke="#FFFFFF" StrokeThickness="0.8" Opacity="0.15"
-                                Data="M 0,100 C 100,80 200,150 300,100 C 400,50 450,120 500,80"/>
-                            <Path Stroke="#FFFFFF" StrokeThickness="0.8" Opacity="0.15"
-                                Data="M 0,200 C 100,180 200,250 300,200 C 400,150 450,220 500,180"/>
-                            <Path Stroke="#FFFFFF" StrokeThickness="0.8" Opacity="0.15"
-                                Data="M 0,300 C 100,280 200,350 300,300 C 400,250 450,320 500,280"/>
-                        </Canvas>
-
-                        <!-- Text Elements -->
-                        <StackPanel VerticalAlignment="Center" Margin="50,0">
-                            <TextBlock Text="Enhance Your" FontWeight="Light" FontSize="28" Foreground="#FFFFFF" Opacity="0.9" TextAlignment="Left"/>
-                            <TextBlock Text="LANGUAGE SKILLS" FontWeight="Bold" FontSize="38" Foreground="#FFFFFF" TextAlignment="Left" Margin="0,0,0,20"/>
-                            <TextBlock Text="Learn English-Uzbek vocabulary, grammar, and more with our interactive platform" 
-                                    Foreground="#FFFFFF" Opacity="0.8" TextWrapping="Wrap" TextAlignment="Left" FontSize="16" Margin="0,0,0,30"/>
-
-                            <!-- Features List -->
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,5">
-                                    <Border Background="#FFFFFF" CornerRadius="10" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
-                                        <Path Data="M 5,10 L 8,14 L 15,6" Stroke="#4285F4" StrokeThickness="2" 
-                                            StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" Margin="3"/>
-                                    </Border>
-                                    <TextBlock Text="Interactive Lessons" Foreground="#FFFFFF" FontSize="15"/>
+                    <!-- Right Panel -->
+                    <Grid x:Name="RightPanel" Grid.Column="1" Width="300" Background="#F8F8F8" Margin="0,30,30,30">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="1" Opacity="0.2"/>
+                        </Grid.Effect>
+                        
+                        <!-- Unusual Design -->
+                        <Grid>
+                            <!-- Background Shapes with More Blue/Violet -->
+                            <Path Fill="#D0E1FF" Opacity="0.7" Stretch="Fill" 
+                                  Data="M0,0 L300,0 L270,200 C240,280 200,300 150,280 L0,300 Z" />
+                            
+                            <Path Fill="#E2D0FF" Opacity="0.6" Stretch="Fill" 
+                                  Data="M300,300 L0,300 L80,150 C120,50 180,100 220,120 L300,100 Z" />
+                            
+                            <!-- Diagonal Divider - Now in Indigo -->
+                            <Path Stroke="#4B24AA" StrokeThickness="2" StrokeDashArray="5,3"
+                                  Data="M50,50 L250,250" />
+                            
+                            <!-- Circle Element with Blue-Violet Gradient -->
+                            <Ellipse Width="120" Height="120" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                    Margin="0,30,30,0">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#3A24AA" Offset="0.0" />
+                                        <GradientStop Color="#6A5ACD" Offset="1.0" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            
+                            <!-- Content Overlay -->
+                            <StackPanel Margin="25,40,25,40">
+                                <!-- Asymmetric Header in Deep Blue -->
+                                <TextBlock Text="L A N G U A G E" FontSize="22" FontWeight="Bold" Foreground="#3A24AA" 
+                                          Margin="20,0,0,5" FontFamily="Consolas">
+                                    <TextBlock.RenderTransform>
+                                        <SkewTransform AngleX="-10" />
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                                
+                                <!-- Word Exploration -->
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock Text="H" FontSize="90" FontWeight="ExtraBold" Foreground="#4B24AA" 
+                                             VerticalAlignment="Top" LineHeight="70" Opacity="0.85" />
+                                    <StackPanel Margin="10,15,0,0">
+                                        <TextBlock Text="appiness" FontSize="28" FontWeight="Light" Foreground="#3A24AA" />
+                                        <TextBlock Text="بَختلىك" FontSize="20" Foreground="#6A5ACD" Margin="5,0,0,0" />
+                                    </StackPanel>
                                 </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Margin="0,5">
-                                    <Border Background="#FFFFFF" CornerRadius="10" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
-                                        <Path Data="M 5,10 L 8,14 L 15,6" Stroke="#4285F4" StrokeThickness="2" 
-                                            StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" Margin="3"/>
-                                    </Border>
-                                    <TextBlock Text="Vocabulary Building" Foreground="#FFFFFF" FontSize="15"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Margin="0,5">
-                                    <Border Background="#FFFFFF" CornerRadius="10" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,12,0">
-                                        <Path Data="M 5,10 L 8,14 L 15,6" Stroke="#4285F4" StrokeThickness="2" 
-                                            StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" Margin="3"/>
-                                    </Border>
-                                    <TextBlock Text="Progress Tracking" Foreground="#FFFFFF" FontSize="15"/>
-                                </StackPanel>
+                                
+                                <!-- Rotated Elements with Blue Tint -->
+                                <Border Width="200" Height="80" Margin="40,20,0,20" Background="#F0F5FF" CornerRadius="5" 
+                                       BorderBrush="#C2D1FF" BorderThickness="1">
+                                    <Border.RenderTransform>
+                                        <RotateTransform Angle="5" />
+                                    </Border.RenderTransform>
+                                    <TextBlock Text="The essence of joy and contentment in life's journey." 
+                                             Padding="15" TextWrapping="Wrap" FontStyle="Italic" Foreground="#3A24AA" />
+                                </Border>
+                                
+                                <!-- Interaction Elements with Unusual Layout -->
+                                <Grid Margin="0,20,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Hexagonal Button - Now in Indigo -->
+                                    <Button Grid.Column="1" Width="50" Height="50" Background="Transparent" 
+                                           BorderThickness="0" Margin="0,0,30,0">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid>
+                                                    <Path Fill="#3A24AA" 
+                                                         Data="M25,0 L50,15 L50,40 L25,50 L0,40 L0,15 Z">
+                                                        <Path.Effect>
+                                                            <DropShadowEffect Color="#AAAAAA" BlurRadius="5" ShadowDepth="2" Opacity="0.3"/>
+                                                        </Path.Effect>
+                                                    </Path>
+                                                    <Path Fill="White" 
+                                                         Data="M20,15 L35,25 L20,35 Z" />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    
+                                    <!-- Staggered Tags - Blue and Violet Theme -->
+                                    <StackPanel Grid.Column="0">
+                                        <Border Background="#D0E1FF" CornerRadius="15" Padding="10,5" Width="100" Margin="0,0,0,8" HorizontalAlignment="Left">
+                                            <TextBlock Text="emotion" Foreground="#3A24AA" FontSize="12" />
+                                        </Border>
+                                        <Border Background="#E2D0FF" CornerRadius="15" Padding="10,5" Width="120" Margin="40,0,0,8" HorizontalAlignment="Left">
+                                            <TextBlock Text="psychology" Foreground="#4B24AA" FontSize="12" />
+                                        </Border>
+                                        <Border Background="#C2D1FF" CornerRadius="15" Padding="10,5" Width="90" Margin="20,0,0,0" HorizontalAlignment="Left">
+                                            <TextBlock Text="well-being" Foreground="#3A24AA" FontSize="12" />
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
                             </StackPanel>
-                        </StackPanel>
-
-
+                        </Grid>
                     </Grid>
                 </Grid>
             </Border>

@@ -84,7 +84,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Button 1: Vocabulary -->
-                        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CategoryButtonStyle}">
+                        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CategoryButtonStyle}" Click="CategoryButton_Click">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>
@@ -97,7 +97,7 @@
                         </Button>
 
                         <!-- Button 2: Grammar -->
-                        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CategoryButtonStyle}">
+                        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CategoryButtonStyle}" Click="CategoryButton_Click">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>
@@ -110,7 +110,7 @@
                         </Button>
 
                         <!-- Button 3: Phrases -->
-                        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource CategoryButtonStyle}">
+                        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource CategoryButtonStyle}" Click="CategoryButton_Click">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>
@@ -123,7 +123,7 @@
                         </Button>
 
                         <!-- Button 4: Listening -->
-                        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CategoryButtonStyle}">
+                        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CategoryButtonStyle}" Click="CategoryButton_Click">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>
@@ -136,7 +136,7 @@
                         </Button>
 
                         <!-- Button 5: Speaking -->
-                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CategoryButtonStyle}">
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CategoryButtonStyle}" Click="CategoryButton_Click">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>
@@ -149,7 +149,7 @@
                         </Button>
 
                         <!-- Button 6: Culture -->
-                        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource CategoryButtonStyle}">
+                        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource CategoryButtonStyle}" Click="CategoryButton_Click">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>

@@ -10,6 +10,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+		<PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Assets\Images\image1.jpg" />
 	  <None Remove="Assets\Images\image2.jpg" />
 	  <None Remove="Assets\Images\image3.jpg" />

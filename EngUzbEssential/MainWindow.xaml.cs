@@ -2781,5 +2781,72 @@ namespace EngUzbEssential
                 }
             }
         }
+
+        public void NavigateToLearnLevel()
+        {
+            System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Method started.");
+            if (MainFrame == null)
+            {
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel Error: MainFrame is null.");
+                MessageBox.Show("Navigation frame is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Creating LearnLevelPage...");
+                // Create and navigate to the LearnLevelPage
+                var learnLevelPage = new Page.LearnLevelPage();
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Navigating MainFrame...");
+                MainFrame.Navigate(learnLevelPage);
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Navigation complete. Applying animation...");
+
+                // Apply animation transition
+                var animation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = TimeSpan.FromMilliseconds(300),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+
+                MainFrame.BeginAnimation(OpacityProperty, animation);
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Animation applied. Hiding elements...");
+
+                // Hide home content and right panel
+                if (HomeContent != null)
+                {
+                    HomeContent.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: HomeContent is null.");
+                }
+
+                if (RightPanel != null)
+                {
+                    RightPanel.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: RightPanel is null.");
+                }
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Elements hidden. Adjusting layout...");
+
+                // Make MainFrame span both columns
+                // Corrected: Set ColumnSpan on MainFrame itself, not its parent.
+                Grid.SetColumnSpan(MainFrame, 2);
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: Set MainFrame ColumnSpan to 2.");
+                
+                // Ensure MainFrame is visible
+                MainFrame.Visibility = Visibility.Visible;
+                System.Diagnostics.Debug.WriteLine("NavigateToLearnLevel: MainFrame set to visible. Method complete.");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"NavigateToLearnLevel Exception: {ex.ToString()}");
+                MessageBox.Show($"Failed to navigate to Learn Level page.\nError: {ex.Message}", "Navigation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
