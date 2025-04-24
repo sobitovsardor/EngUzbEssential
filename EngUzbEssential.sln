@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngUzbEssential.Service", "
 		{6FBF9034-0389-4B18-B237-4CD451B17A29} = {6FBF9034-0389-4B18-B237-4CD451B17A29}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B445ABA0-D7B7-4FEB-8FC3-F90CDC3F2503} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6FBF9034-0389-4B18-B237-4CD451B17A29} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F417F1AA-16BD-4C2E-9156-9EEF5F6995A6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{769BD456-816C-48C2-BC94-84BDCD2D39E7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1893542E-49C6-48F1-A144-C728706D5249}
