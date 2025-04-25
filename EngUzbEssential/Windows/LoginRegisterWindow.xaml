@@ -252,7 +252,7 @@
                 <Grid.Effect>
                     <DropShadowEffect ShadowDepth="1" BlurRadius="5" Opacity="0.3" Direction="270"/>
                 </Grid.Effect>
-                <TextBlock Text="EngUzbEssential" Foreground="White" FontWeight="SemiBold" 
+                <TextBlock Text="PolyglotPro Essential" Foreground="White" FontWeight="SemiBold" 
                           FontSize="15" VerticalAlignment="Center" Margin="15,0,0,0"/>
                 <!-- Window Control Buttons -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

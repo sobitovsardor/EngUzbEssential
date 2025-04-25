@@ -6,7 +6,8 @@
 		<TargetFramework>net8.0-windows8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<RootNamespace>EngUzbEssential</RootNamespace>
+		<RootNamespace>EngUzbEssential.Desktop</RootNamespace>
+		<AssemblyName>EngUzbEssential.Desktop</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>

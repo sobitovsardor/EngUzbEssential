@@ -738,7 +738,7 @@ namespace EngUzbEssential
                 }
                 
                 // Create the Games page
-                Page.GamePage gamePage = new Page.GamePage();
+                EngUzbEssential.Desktop.Page.GamePage gamePage = new EngUzbEssential.Desktop.Page.GamePage();
                 
                 // Navigate to the Games page
                 MainFrame.Navigate(gamePage);
