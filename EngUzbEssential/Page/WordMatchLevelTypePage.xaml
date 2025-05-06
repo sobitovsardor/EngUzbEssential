@@ -6,17 +6,40 @@
       xmlns:local="clr-namespace:EngUzbEssential.Page"
       mc:Ignorable="d" 
       d:DesignHeight="650"
-      Title="Word Match Settings" Width="469">
+      Title="Word Match Settings">
 
     <Grid Background="#FDFAF0" Margin="10,10,0,42">
         <!-- Back Button -->
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" 
                 Background="Transparent" BorderThickness="0" Cursor="Hand" Click="BackButton_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            CornerRadius="6" 
+                            Padding="12,8,12,8">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#DDDDDD" BlurRadius="5" ShadowDepth="1" Opacity="0.3"/>
+                        </Border.Effect>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#F5F5F5"/>
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="#D1434B" BlurRadius="8" ShadowDepth="2" Opacity="0.4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
             <StackPanel Orientation="Horizontal">
-                <Path Data="M 10,0 L 0,10 L 10,20" Stroke="#24284A" StrokeThickness="2" 
+                <Path Data="M 10,0 L 0,10 L 10,20" Stroke="#24284A" StrokeThickness="2.5" 
                       VerticalAlignment="Center" Margin="5,0,5,0"
                       StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
-                <TextBlock Text="BACK" FontSize="14" FontWeight="SemiBold" 
+                <TextBlock Text="BACK" FontSize="15" FontWeight="Bold" 
                            Foreground="#24284A" VerticalAlignment="Center" Margin="5,0,0,0"/>
             </StackPanel>
         </Button>
