@@ -1,0 +1,254 @@
+<Page x:Class="PolyglotEssential.Page.WordMatchLevelPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PolyglotEssential.Page"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1200"
+      Title="WordMatchLevelPage">
+
+    <Page.Resources>
+        <Style x:Key="LevelButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#EEEEEE"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="15">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#DDDDDD" BlurRadius="15" ShadowDepth="5" Opacity="0.4"/>
+                            </Border.Effect>
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F8F8F8"/>
+                                <Setter Property="BorderBrush" Value="#D1434B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <!-- Background with cream color to match main window -->
+        <Border Background="#FDFAF0" CornerRadius="0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="40">
+                    <!-- Back button and title -->
+                    <Grid Margin="0,10,0,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" Background="Transparent" BorderThickness="0" Cursor="Hand" Click="BackButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M 10,0 L 0,10 L 10,20" Stroke="#24284A" StrokeThickness="2" 
+                                      VerticalAlignment="Center" Margin="5,0,5,0"
+                                      StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+                                <TextBlock Text="BACK" FontSize="14" FontWeight="SemiBold" 
+                                           Foreground="#24284A" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <TextBlock Grid.Column="1" Text="SELECT LEVEL" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" Width="330"/>
+                    </Grid>
+
+                    <!-- Grid of level buttons -->
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Level Buttons -->
+                        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 1" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 2" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 3" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="0" Grid.Column="3" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 4" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 5" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 6" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 7" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="3" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 8" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 9" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 10" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 11" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 12" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 13" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 14" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 15" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 16" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 17" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 18" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="4" Grid.Column="2" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 19" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Grid.Row="4" Grid.Column="3" Style="{StaticResource LevelButtonStyle}" Click="LevelButton_Click">
+                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Level 20" FontSize="24" FontWeight="Bold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="0/20" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+                                <TextBlock Text="Points: 0" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

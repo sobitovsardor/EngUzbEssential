@@ -1,0 +1,46 @@
+<!-- PolyglotEssential.csproj -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>PolyglotEssential.Desktop</RootNamespace>
+		<AssemblyName>PolyglotEssential.Desktop</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+		<PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\Images\image1.jpg" />
+	  <None Remove="Assets\Images\image2.jpg" />
+	  <None Remove="Assets\Images\image3.jpg" />
+	  <None Remove="Assets\Images\image4.jpg" />
+	  <None Remove="Assets\Images\image5.jpg" />
+	  <None Remove="Assets\Images\image6.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Assets\Images\image1.jpg" />
+	  <Resource Include="Assets\Images\image2.jpg" />
+	  <Resource Include="Assets\Images\image3.jpg" />
+	  <Resource Include="Assets\Images\image4.jpg" />
+	  <Resource Include="Assets\Images\image5.jpg" />
+	  <Resource Include="Assets\Images\image6.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Windows\*.cs">
+		<DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PolyglotEssential.Service\PolyglotEssential.Service.csproj" />
+	</ItemGroup>
+
+</Project> 

@@ -1,0 +1,294 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace PolyglotEssential.Page
+{
+    /// <summary>
+    /// Interaction logic for WordMatchLevelTypePage.xaml
+    /// </summary>
+    public partial class WordMatchLevelTypePage : System.Windows.Controls.Page
+    {
+        // Selected options
+        private bool isEngToUzb = true;
+        private string selectedDifficulty = "Easy";
+        private int levelNumber = 1;
+        
+        public WordMatchLevelTypePage()
+        {
+            InitializeComponent();
+            
+            // Loaded event ensures the visual tree is fully populated
+            this.Loaded += (s, e) => 
+            {
+                try 
+                {
+                    // Initialize radio buttons
+                    InitializeRadioButtons();
+                } 
+                catch 
+                {
+                    // Fallback in case anything goes wrong
+                }
+            };
+        }
+
+        // Constructor with level parameter
+        public WordMatchLevelTypePage(int level)
+        {
+            InitializeComponent();
+            this.levelNumber = level;
+            
+            // Loaded event ensures the visual tree is fully populated
+            this.Loaded += (s, e) => 
+            {
+                try 
+                {
+                    // Update level title in UI
+                    LevelTitle.Text = $"Level {level}";
+                    
+                    // Initialize radio buttons
+                    InitializeRadioButtons();
+                } 
+                catch 
+                {
+                    // Fallback in case anything goes wrong
+                }
+            };
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Make sure we're working with a Grid
+                Grid parentGrid = sender as Grid;
+                if (parentGrid == null) return;
+
+                // Make sure the grid has children
+                if (parentGrid.Children.Count == 0) return;
+                
+                // Find the ellipses - make sure it exists
+                Ellipse outerEllipse = parentGrid.Children[0] as Ellipse;
+                if (outerEllipse == null) return;
+                
+                // Get the text to determine which option was selected
+                TextBlock textBlock = parentGrid.Children.OfType<TextBlock>().FirstOrDefault();
+                if (textBlock == null) return;
+
+                string text = textBlock.Text ?? string.Empty;
+
+                // Update selected options based on the text and determine group
+                bool isLanguageGroup = false;
+                bool isDifficultyGroup = false;
+                
+                if (text.Contains("ENG - UZB"))
+                {
+                    isEngToUzb = true;
+                    isLanguageGroup = true;
+                }
+                else if (text.Contains("UZB - ENG"))
+                {
+                    isEngToUzb = false;
+                    isLanguageGroup = true;
+                }
+                else if (text.Contains("Easy"))
+                {
+                    selectedDifficulty = "Easy";
+                    isDifficultyGroup = true;
+                }
+                else if (text.Contains("Medium"))
+                {
+                    selectedDifficulty = "Medium";
+                    isDifficultyGroup = true;
+                }
+                else if (text.Contains("Expert"))
+                {
+                    selectedDifficulty = "Expert";
+                    isDifficultyGroup = true;
+                }
+
+                // Reset other radio buttons in the same group using FindName
+                if (isLanguageGroup)
+                {
+                    // Reset language direction radios except the selected one
+                    Grid engToUzbGrid = this.FindName("EnglishToUzbekGrid") as Grid;
+                    Grid uzbToEngGrid = this.FindName("UzbekToEnglishGrid") as Grid;
+                    
+                    if (engToUzbGrid != null && parentGrid != engToUzbGrid)
+                        ResetRadioButton(engToUzbGrid, true);
+                    
+                    if (uzbToEngGrid != null && parentGrid != uzbToEngGrid)
+                        ResetRadioButton(uzbToEngGrid, true);
+                }
+                else if (isDifficultyGroup)
+                {
+                    // Reset difficulty radios except the selected one
+                    Grid easyGrid = this.FindName("EasyGrid") as Grid;
+                    Grid mediumGrid = this.FindName("MediumGrid") as Grid;
+                    Grid expertGrid = this.FindName("ExpertGrid") as Grid;
+                    
+                    if (easyGrid != null && parentGrid != easyGrid)
+                        ResetRadioButton(easyGrid, true);
+                    
+                    if (mediumGrid != null && parentGrid != mediumGrid)
+                        ResetRadioButton(mediumGrid, true);
+                    
+                    if (expertGrid != null && parentGrid != expertGrid)
+                        ResetRadioButton(expertGrid, true);
+                }
+
+                // Update visual selection for the clicked radio button
+                SelectRadioButton(parentGrid);
+            }
+            catch (Exception ex)
+            {
+                // If something fails, log the error but don't crash the app
+                MessageBox.Show($"Error selecting option: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        
+        // Helper method to reset a radio button
+        private void ResetRadioButton(Grid grid, bool shouldReset)
+        {
+            // Safety check
+            if (grid == null || !shouldReset) return;
+            
+            try
+            {
+                // Find and reset the outer ellipse
+                Ellipse outerEllipse = grid.Children.OfType<Ellipse>().FirstOrDefault();
+                if (outerEllipse == null) return;
+                
+                outerEllipse.Fill = new SolidColorBrush(Colors.Transparent);
+                outerEllipse.Stroke = new SolidColorBrush(Color.FromRgb(187, 187, 187)); // #BBBBBB
+                
+                // Remove inner ellipse if it exists
+                var innerEllipses = grid.Children.OfType<Ellipse>().Skip(1).ToList();
+                foreach (var ellipse in innerEllipses)
+                {
+                    grid.Children.Remove(ellipse);
+                }
+                
+                // Find and reset the text color
+                TextBlock textBlock = grid.Children.OfType<TextBlock>().FirstOrDefault();
+                if (textBlock != null)
+                {
+                    textBlock.Foreground = new SolidColorBrush(Color.FromRgb(102, 106, 122)); // #666A7A
+                }
+            }
+            catch
+            {
+                // Ignore errors during reset
+            }
+        }
+        
+        // Helper method to select a radio button
+        private void SelectRadioButton(Grid grid)
+        {
+            // Safety check
+            if (grid == null) return;
+            
+            try
+            {
+                // Find and update the outer ellipse
+                Ellipse outerEllipse = grid.Children.OfType<Ellipse>().FirstOrDefault();
+                if (outerEllipse == null) return;
+                
+                outerEllipse.Fill = new SolidColorBrush(Color.FromRgb(209, 67, 75)); // #D1434B
+                outerEllipse.Stroke = new SolidColorBrush(Colors.White);
+                
+                // Remove any existing inner ellipses first
+                var existingInnerEllipses = grid.Children.OfType<Ellipse>().Skip(1).ToList();
+                foreach (var ellipse in existingInnerEllipses)
+                {
+                    grid.Children.Remove(ellipse);
+                }
+                
+                // Add inner ellipse
+                Ellipse innerEllipse = new Ellipse
+                {
+                    Width = 12,
+                    Height = 12,
+                    Fill = new SolidColorBrush(Colors.White),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                grid.Children.Insert(1, innerEllipse);
+                
+                // Find and update the text color
+                TextBlock textBlock = grid.Children.OfType<TextBlock>().FirstOrDefault();
+                if (textBlock != null)
+                {
+                    textBlock.Foreground = new SolidColorBrush(Color.FromRgb(36, 40, 74)); // #24284A
+                }
+            }
+            catch
+            {
+                // Ignore errors during selection
+            }
+        }
+        
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get time and points based on difficulty
+            int timeSeconds = 240;
+            int points = 1;
+            
+            switch (selectedDifficulty)
+            {
+                case "Medium":
+                    timeSeconds = 120;
+                    points = 2;
+                    break;
+                case "Expert":
+                    timeSeconds = 60;
+                    points = 3;
+                    break;
+            }
+            
+            MessageBox.Show($"Selected options:\nLevel: {levelNumber}\nDirection: {(isEngToUzb ? "English to Uzbek" : "Uzbek to English")}\nDifficulty: {selectedDifficulty}\nTime: {timeSeconds}s\nPoints: {points}pt", 
+                "Selection Confirmed", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+            // Here you would navigate to the actual game page with these parameters
+            // NavigationService.Navigate(new WordMatchGamePage(levelNumber, isEngToUzb, selectedDifficulty, timeSeconds, points));
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        // Method to initialize radio buttons to their default state
+        private void InitializeRadioButtons()
+        {
+            // Make sure default selections are properly displayed
+            Grid engToUzbGrid = this.FindName("EnglishToUzbekGrid") as Grid;
+            Grid easyGrid = this.FindName("EasyGrid") as Grid;
+            
+            if (engToUzbGrid != null)
+            {
+                SelectRadioButton(engToUzbGrid);
+            }
+            
+            if (easyGrid != null)
+            {
+                SelectRadioButton(easyGrid);
+            }
+        }
+    }
+}
