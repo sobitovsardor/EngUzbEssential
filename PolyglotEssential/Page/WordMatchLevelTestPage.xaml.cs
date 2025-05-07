@@ -110,9 +110,8 @@ namespace PolyglotEssential.Page
             }
             else
             {
-
-                MessageBox.Show("Quiz finished!", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
-                // Optionally: navigate away or show results
+                // Navigate to result page
+                NavigationService?.Navigate(new PolyglotEssential.Desktop.Page.WordMatchLevelTestResultPage());
             }
         }
 
