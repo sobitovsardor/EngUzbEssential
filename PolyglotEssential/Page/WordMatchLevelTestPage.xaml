@@ -8,7 +8,75 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WordMatchLevelTestPage">
 
-    <Grid>
-        
+    <Page.Resources>
+        <!-- Action Button Style (copied from MainWindow) -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#24284A"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="25,10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#24284A"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="8">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F8F8F8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="White">
+        <!-- Top Bar -->
+        <Grid Margin="0,0,0,0" Height="60" VerticalAlignment="Top" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Your Score:" Foreground="#24284A" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+            <TextBlock Text="Record:" Foreground="#24284A" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Grid.Column="1"/>
+        </Grid>
+
+        <!-- Center Card -->
+        <Border Background="White" CornerRadius="24" Padding="30" Margin="100,80,100,0" VerticalAlignment="Top" Height="200">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+            </Border.Effect>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Timer Circle (accent color) -->
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse Width="60" Height="60" Stroke="#D1434B" StrokeThickness="6" Fill="Transparent"/>
+                    <Path x:Name="TimerArc" Stroke="#21BF73" StrokeThickness="6" Fill="Transparent"/>
+                    <TextBlock x:Name="TimerText" Text="231" Foreground="#D1434B" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <TextBlock x:Name="QuestionNumberText" Text="Question: 1/20" Foreground="#24284A" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <TextBlock x:Name="WordText" Text="angry" Foreground="#24284A" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Answer Buttons -->
+        <StackPanel VerticalAlignment="Bottom" Margin="40,0,40,40" >
+            <Button x:Name="AnswerButtonA" Style="{StaticResource ActionButtonStyle}" Content="A)   tag, pastgi qism" Height="50" Margin="0,0,0,10" Click="AnswerButton_Click" />
+            <Button x:Name="AnswerButtonB" Style="{StaticResource ActionButtonStyle}" Content="B)   yetib kelmoq, kelmoq" Height="50" Margin="0,0,0,10" Click="AnswerButton_Click" />
+            <Button x:Name="AnswerButtonC" Style="{StaticResource ActionButtonStyle}" Content="C)   qo'rqan, cho'chigan" Height="50" Margin="0,0,0,10" Click="AnswerButton_Click" />
+            <Button x:Name="AnswerButtonD" Style="{StaticResource ActionButtonStyle}" Content="D)   jahli chiqqan, badjahl" Height="50" Click="AnswerButton_Click" />
+        </StackPanel>
     </Grid>
 </Page>

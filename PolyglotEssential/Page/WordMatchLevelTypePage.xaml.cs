@@ -257,12 +257,13 @@ namespace PolyglotEssential.Page
                     points = 3;
                     break;
             }
-            
-            MessageBox.Show($"Selected options:\nLevel: {levelNumber}\nDirection: {(isEngToUzb ? "English to Uzbek" : "Uzbek to English")}\nDifficulty: {selectedDifficulty}\nTime: {timeSeconds}s\nPoints: {points}pt", 
-                "Selection Confirmed", MessageBoxButton.OK, MessageBoxImage.Information);
-                
-            // Here you would navigate to the actual game page with these parameters
-            // NavigationService.Navigate(new WordMatchGamePage(levelNumber, isEngToUzb, selectedDifficulty, timeSeconds, points));
+
+            // Optionally show confirmation (commented out)
+            // MessageBox.Show($"Selected options:\nLevel: {levelNumber}\nDirection: {(isEngToUzb ? "English to Uzbek" : "Uzbek to English")}\nDifficulty: {selectedDifficulty}\nTime: {timeSeconds}s\nPoints: {points}pt", 
+            //    "Selection Confirmed", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Navigate to the test page
+            NavigationService.Navigate(new WordMatchLevelTestPage());
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

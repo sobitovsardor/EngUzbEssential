@@ -222,7 +222,7 @@
 
                             <!-- Main Content -->
                             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="531" Margin="33,80,0,0">
-                                <TextBlock Text="PolyglotPro" FontSize="72" FontWeight="Bold" Foreground="#24284A"
+                                <TextBlock Text="Polyglot" FontSize="72" FontWeight="Bold" Foreground="#24284A"
                                         FontFamily="Comic Sans MS"/>
                                 <TextBlock Text="Essential" FontSize="72" FontWeight="Bold" Foreground="#24284A" 
                                         Margin="0,-20,0,20" FontFamily="Comic Sans MS" Width="543"/>
