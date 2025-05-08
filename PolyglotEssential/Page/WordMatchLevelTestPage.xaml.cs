@@ -1,17 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace PolyglotEssential.Page
@@ -22,7 +12,7 @@ namespace PolyglotEssential.Page
     public partial class WordMatchLevelTestPage : System.Windows.Controls.Page
     {
         private DispatcherTimer timer;
-        private int totalSeconds = 231;
+        private int totalSeconds = 5;
         private int remainingSeconds;
         private int currentQuestionIndex = 0;
 
@@ -73,6 +63,7 @@ namespace PolyglotEssential.Page
             {
                 timer.Stop();
                 // Optionally handle timer end (e.g., auto-submit, show message)
+                NavigationService?.Navigate(new PolyglotEssential.Desktop.Page.WordMatchLevelTestResultPage());
             }
         }
 
@@ -101,7 +92,7 @@ namespace PolyglotEssential.Page
         private void AnswerButton_Click(object sender, RoutedEventArgs e)
         {
             // Stop timer immediately so it doesn't update during transition
-           
+
             // Optionally: check if answer is correct, give feedback, etc.
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.Count)

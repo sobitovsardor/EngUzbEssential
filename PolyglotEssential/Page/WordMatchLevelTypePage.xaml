@@ -5,136 +5,250 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PolyglotEssential.Page"
       mc:Ignorable="d" 
-      d:DesignHeight="650"
-      Title="Word Match Settings">
+      d:DesignHeight="750" d:DesignWidth="500"
+      Title="Word Match Settings"
+      Background="#F8F9FA">
 
-    <Grid Background="#FDFAF0" Margin="10,10,0,42">
-        <!-- Back Button -->
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" 
-                Background="Transparent" BorderThickness="0" Cursor="Hand" Click="BackButton_Click">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border x:Name="border" 
-                            Background="{TemplateBinding Background}" 
-                            CornerRadius="6" 
-                            Padding="12,8,12,8">
-                        <Border.Effect>
-                            <DropShadowEffect Color="#DDDDDD" BlurRadius="5" ShadowDepth="1" Opacity="0.3"/>
-                        </Border.Effect>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#F5F5F5"/>
-                            <Setter TargetName="border" Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect Color="#D1434B" BlurRadius="8" ShadowDepth="2" Opacity="0.4"/>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
-            <StackPanel Orientation="Horizontal">
-                <Path Data="M 10,0 L 0,10 L 10,20" Stroke="#24284A" StrokeThickness="2.5" 
-                      VerticalAlignment="Center" Margin="5,0,5,0"
-                      StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
-                <TextBlock Text="BACK" FontSize="15" FontWeight="Bold" 
-                           Foreground="#24284A" VerticalAlignment="Center" Margin="5,0,0,0"/>
+    <Page.Resources>
+        <Style x:Key="RadioButtonGridStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="RadioButtonTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="16,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="RadioButtonOuterEllipseStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="RadioButtonInnerEllipseStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#24284A"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+        <Style x:Key="ResultButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#24284A"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#24284A"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="12">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F8F8F8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GreenButtonStyle" TargetType="Button" BasedOn="{StaticResource ResultButtonStyle}">
+            <Setter Property="Background" Value="#21BF73"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#21BF73"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+                <!-- Header Section -->
+                <StackPanel Margin="0,24,0,32">
+                    <TextBlock x:Name="LevelTitle" 
+                             Text="Level 1" 
+                             FontSize="28" 
+                             FontWeight="Bold" 
+                             Foreground="#24284A"
+                             HorizontalAlignment="Center"/>
+                    <TextBlock Text="Choose your test settings" 
+                             FontSize="16" 
+                             Foreground="#666A7A"
+                             HorizontalAlignment="Center"
+                             Margin="0,8,0,0"/>
+                </StackPanel>
+
+                <!-- Main Content Card -->
+                <Border Background="White" 
+                        CornerRadius="20" 
+                        Padding="24" 
+                        Margin="0,0,0,24">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="15" ShadowDepth="3" Opacity="0.15"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <!-- Test Type Selection -->
+                        <TextBlock Text="Select test type" 
+                                 Style="{StaticResource SectionTitleStyle}"/>
+
+                        <Grid x:Name="EnglishToUzbekGrid" 
+                              Tag="RadioButton" 
+                              Style="{StaticResource RadioButtonGridStyle}"
+                              MouseLeftButtonDown="RadioButton_Checked">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Style="{StaticResource RadioButtonOuterEllipseStyle}"
+                                    Fill="#D1434B" 
+                                    Stroke="White"/>
+                            <Ellipse Style="{StaticResource RadioButtonInnerEllipseStyle}"
+                                    Fill="White"/>
+
+                            <TextBlock Grid.Column="1" 
+                                     Text="English to Uzbek" 
+                                     Style="{StaticResource RadioButtonTextStyle}"
+                                     Foreground="#24284A"/>
+                        </Grid>
+
+                        <Grid x:Name="UzbekToEnglishGrid" 
+                              Tag="RadioButton" 
+                              Style="{StaticResource RadioButtonGridStyle}"
+                              MouseLeftButtonDown="RadioButton_Checked">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Style="{StaticResource RadioButtonOuterEllipseStyle}"
+                                    Fill="Transparent" 
+                                    Stroke="#BBBBBB"/>
+
+                            <TextBlock Grid.Column="1" 
+                                     Text="Uzbek to English" 
+                                     Style="{StaticResource RadioButtonTextStyle}"
+                                     Foreground="#666A7A"/>
+                        </Grid>
+
+                        <!-- Difficulty Selection -->
+                        <TextBlock Text="Choose difficulty" 
+                                 Style="{StaticResource SectionTitleStyle}"
+                                 Margin="0,24,0,0"/>
+
+                        <Grid x:Name="EasyGrid" 
+                              Tag="RadioButton" 
+                              Style="{StaticResource RadioButtonGridStyle}"
+                              MouseLeftButtonDown="RadioButton_Checked">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Style="{StaticResource RadioButtonOuterEllipseStyle}"
+                                    Fill="#D1434B" 
+                                    Stroke="White"/>
+                            <Ellipse Style="{StaticResource RadioButtonInnerEllipseStyle}"
+                                    Fill="White"/>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Easy" 
+                                         Style="{StaticResource RadioButtonTextStyle}"
+                                         Foreground="#24284A"/>
+                                <TextBlock Text="240 seconds • 1 point" 
+                                         FontSize="14" 
+                                         Foreground="#666A7A"
+                                         Margin="16,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid x:Name="MediumGrid" 
+                              Tag="RadioButton" 
+                              Style="{StaticResource RadioButtonGridStyle}"
+                              MouseLeftButtonDown="RadioButton_Checked">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Style="{StaticResource RadioButtonOuterEllipseStyle}"
+                                    Fill="Transparent" 
+                                    Stroke="#BBBBBB"/>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Medium" 
+                                         Style="{StaticResource RadioButtonTextStyle}"
+                                         Foreground="#666A7A"/>
+                                <TextBlock Text="120 seconds • 2 points" 
+                                         FontSize="14" 
+                                         Foreground="#666A7A"
+                                         Margin="16,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid x:Name="ExpertGrid" 
+                              Tag="RadioButton" 
+                              Style="{StaticResource RadioButtonGridStyle}"
+                              MouseLeftButtonDown="RadioButton_Checked">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Style="{StaticResource RadioButtonOuterEllipseStyle}"
+                                    Fill="Transparent" 
+                                    Stroke="#BBBBBB"/>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Expert" 
+                                         Style="{StaticResource RadioButtonTextStyle}"
+                                         Foreground="#666A7A"/>
+                                <TextBlock Text="60 seconds • 3 points" 
+                                         FontSize="14" 
+                                         Foreground="#666A7A"
+                                         Margin="16,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Action Buttons -->
+                        <StackPanel Orientation="Horizontal" 
+                                  HorizontalAlignment="Right" 
+                                  Margin="0,24,0,0">
+                            <Button Content="Back" 
+                                    Style="{StaticResource ResultButtonStyle}" 
+                                    Margin="0,0,16,0" 
+                                    Height="48" 
+                                    Width="100"
+                                    Click="BackButton_Click"/>
+                            <Button Content="Start" 
+                                    Style="{StaticResource GreenButtonStyle}" 
+                                    Height="48" 
+                                    Width="120"
+                                    Click="OkButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
             </StackPanel>
-        </Button>
-
-        <!-- Selection Panel -->
-        <Border Background="White" CornerRadius="15" BorderThickness="1" BorderBrush="#EEEEEE" Margin="10,10,10,10">
-            <Border.Effect>
-                <DropShadowEffect Color="#DDDDDD" BlurRadius="10" ShadowDepth="3" Opacity="0.3"/>
-            </Border.Effect>
-            <StackPanel Margin="20">
-                <!-- Level Title -->
-                <TextBlock x:Name="LevelTitle" Text="Level 1" FontSize="28" Foreground="#24284A" Margin="0,0,0,20" FontWeight="Bold" HorizontalAlignment="Center"/>
-
-                <!-- Test Type Selection -->
-                <TextBlock Text="Select test of type:" FontSize="24" Foreground="#24284A" Margin="0,0,0,15" FontWeight="SemiBold"/>
-
-                <Grid x:Name="EnglishToUzbekGrid" Tag="RadioButton" Margin="0,0,0,10" MouseDown="RadioButton_Checked">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Width="24" Height="24" Fill="#D1434B" Stroke="White" StrokeThickness="2"/>
-                    <Ellipse Width="12" Height="12" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <TextBlock Grid.Column="1" Text="ENG - UZB" Foreground="#24284A" FontSize="18" FontWeight="SemiBold" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                </Grid>
-
-                <Grid x:Name="UzbekToEnglishGrid" Tag="RadioButton" Margin="0,0,0,25" MouseDown="RadioButton_Checked">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Width="24" Height="24" Fill="Transparent" Stroke="#BBBBBB" StrokeThickness="2"/>
-
-                    <TextBlock Grid.Column="1" Text="UZB - ENG" Foreground="#666A7A" FontSize="18" FontWeight="SemiBold" Margin="15,0,0,0" VerticalAlignment="Center"/>
-                </Grid>
-
-                <!-- Difficulty Categories -->
-                <TextBlock Text="Choose one of the categories:" FontSize="22" Foreground="#24284A" Margin="0,0,0,15" FontWeight="SemiBold"/>
-
-                <Grid x:Name="EasyGrid" Tag="RadioButton" Margin="0,0,0,10" MouseDown="RadioButton_Checked">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Width="24" Height="24" Fill="#D1434B" Stroke="White" StrokeThickness="2"/>
-                    <Ellipse Width="12" Height="12" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <TextBlock Grid.Column="1" Text="Easy(time: 240s; coin: 1pt)" Foreground="#24284A" FontSize="18" FontWeight="SemiBold" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                </Grid>
-
-                <Grid x:Name="MediumGrid" Tag="RadioButton" Margin="0,0,0,10" MouseDown="RadioButton_Checked">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Width="24" Height="24" Fill="Transparent" Stroke="#BBBBBB" StrokeThickness="2"/>
-
-                    <TextBlock Grid.Column="1" Text="Medium(time: 120s; coin: 2pt)" Foreground="#666A7A" FontSize="18" FontWeight="SemiBold" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                </Grid>
-
-                <Grid x:Name="ExpertGrid" Tag="RadioButton" Margin="0,0,0,15" MouseDown="RadioButton_Checked">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Width="24" Height="24" Fill="Transparent" Stroke="#BBBBBB" StrokeThickness="2"/>
-
-                    <TextBlock Grid.Column="1" Text="Expert(time: 60s; coin: 3pt)" Foreground="#666A7A" FontSize="18" FontWeight="SemiBold" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                </Grid>
-
-                <!-- OK Button -->
-                <Button HorizontalAlignment="Right" Width="100" Height="45" Margin="0,10,0,0" Background="#24284A" Foreground="White" FontSize="20" FontWeight="SemiBold" BorderThickness="0" Content="Ok" Click="OkButton_Click" RenderTransformOrigin="0.502,1.467">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="6">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#D1434B"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </StackPanel>
-        </Border>
-
-        <!-- Input Box -->
-
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -1,18 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PolyglotEssential.Page
 {
@@ -30,47 +22,47 @@ namespace PolyglotEssential.Page
         // Sample word data - in a real app, this would come from a database or API
         private List<WordPair> wordList = new List<WordPair>
         {
-            new WordPair { 
-                EnglishWord = "Apple", 
-                UzbekWord = "Olma", 
-                Pronunciation = "/'æp.?l/", 
-                Example = "I eat an apple every day.", 
+            new WordPair {
+                EnglishWord = "Apple",
+                UzbekWord = "Olma",
+                Pronunciation = "/'æp.?l/",
+                Example = "I eat an apple every day.",
                 UzbekExample = "Men har kuni olma yeyman.",
                 Definition = "A round fruit with red, yellow, or green skin and a white inside.",
                 Level = 1
             },
-            new WordPair { 
-                EnglishWord = "Book", 
-                UzbekWord = "Kitob", 
-                Pronunciation = "/b?k/", 
-                Example = "She reads a book before bed.", 
+            new WordPair {
+                EnglishWord = "Book",
+                UzbekWord = "Kitob",
+                Pronunciation = "/b?k/",
+                Example = "She reads a book before bed.",
                 UzbekExample = "U yotishdan oldin kitob o'qiydi.",
                 Definition = "A set of pages with text and sometimes pictures, bound together.",
                 Level = 1
             },
-            new WordPair { 
-                EnglishWord = "Happiness", 
-                UzbekWord = "Baxt", 
-                Pronunciation = "/'hæpin?s/", 
-                Example = "Money can't buy happiness.", 
+            new WordPair {
+                EnglishWord = "Happiness",
+                UzbekWord = "Baxt",
+                Pronunciation = "/'hæpin?s/",
+                Example = "Money can't buy happiness.",
                 UzbekExample = "Pul baxtni sotib ololmaydi.",
                 Definition = "The state of being happy; a feeling of contentment, joy, or pleasure.",
                 Level = 1
             },
-            new WordPair { 
-                EnglishWord = "Water", 
-                UzbekWord = "Suv", 
-                Pronunciation = "/'w??t?(r)/", 
-                Example = "Drink plenty of water.", 
+            new WordPair {
+                EnglishWord = "Water",
+                UzbekWord = "Suv",
+                Pronunciation = "/'w??t?(r)/",
+                Example = "Drink plenty of water.",
                 UzbekExample = "Ko'p suv iching.",
                 Definition = "A clear liquid without color, smell, or taste that falls as rain.",
                 Level = 1
             },
-            new WordPair { 
-                EnglishWord = "Friend", 
-                UzbekWord = "Do'st", 
-                Pronunciation = "/frend/", 
-                Example = "A true friend is always there for you.", 
+            new WordPair {
+                EnglishWord = "Friend",
+                UzbekWord = "Do'st",
+                Pronunciation = "/frend/",
+                Example = "A true friend is always there for you.",
                 UzbekExample = "Haqiqiy do'st har doim siz uchun bor.",
                 Definition = "A person you know well and like, but who is not related to you.",
                 Level = 1
@@ -81,7 +73,7 @@ namespace PolyglotEssential.Page
         {
             InitializeComponent();
             this.Loaded += Page_Loaded;
-            
+
             // Initialize word data
             UpdateWordDisplay();
         }
@@ -90,10 +82,10 @@ namespace PolyglotEssential.Page
         {
             InitializeComponent();
             this.Loaded += Page_Loaded;
-            
+
             // Set the current level
             this.currentLevel = level;
-            
+
             // Initialize word data
             UpdateWordDisplay();
         }
@@ -130,7 +122,7 @@ namespace PolyglotEssential.Page
                     ApplyAnimation(backButton, delay, AnimationType.SlideFromLeft);
                     delay += 50;
                 }
-                
+
                 // Animate Title
                 if (title != null)
                 {
@@ -208,7 +200,8 @@ namespace PolyglotEssential.Page
                 transform.Y = 30;
                 DoubleAnimation slideAnimation = new DoubleAnimation
                 {
-                    From = 30, To = 0,
+                    From = 30,
+                    To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(500)),
                     BeginTime = TimeSpan.FromMilliseconds(delayMs),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
@@ -222,7 +215,8 @@ namespace PolyglotEssential.Page
                 transform.X = -30;
                 DoubleAnimation slideAnimation = new DoubleAnimation
                 {
-                    From = -30, To = 0,
+                    From = -30,
+                    To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(500)),
                     BeginTime = TimeSpan.FromMilliseconds(delayMs),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
@@ -236,7 +230,8 @@ namespace PolyglotEssential.Page
                 transform.Y = -20;
                 DoubleAnimation slideAnimation = new DoubleAnimation
                 {
-                    From = -20, To = 0,
+                    From = -20,
+                    To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(500)),
                     BeginTime = TimeSpan.FromMilliseconds(delayMs),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
@@ -245,7 +240,7 @@ namespace PolyglotEssential.Page
                 Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
                 storyboard.Children.Add(slideAnimation);
             }
-            
+
             storyboard.Begin();
         }
 
@@ -314,50 +309,50 @@ namespace PolyglotEssential.Page
                 // Filter words based on the current level
                 var levelWords = wordList.Where(w => w.Level == currentLevel).ToList();
                 totalWords = levelWords.Count;
-                
+
                 if (levelWords.Count > 0 && currentWordIndex < levelWords.Count)
                 {
                     var currentWord = levelWords[currentWordIndex];
-                    
+
                     // Find the TextBlocks in the current visible word card
                     var visibleWordCards = FindVisualChildren<Border>(this)
                         .Where(b => b.Style != null && b.Style.ToString().Contains("WordCardStyle"))
                         .ToList();
-                    
+
                     if (visibleWordCards.Count > 0)
                     {
                         // We'll use the first visible word card
                         var wordCard = visibleWordCards[0];
-                        
+
                         // Find TextBlocks within the word card
                         var englishWordBlock = FindVisualChildren<TextBlock>(wordCard)
-                            .FirstOrDefault(tb => tb.FontSize == 36 && tb.Foreground is SolidColorBrush brush && 
+                            .FirstOrDefault(tb => tb.FontSize == 36 && tb.Foreground is SolidColorBrush brush &&
                                          ((SolidColorBrush)tb.Foreground).Color.ToString() == "#FF24284A");
-                        
+
                         var uzbekWordBlock = FindVisualChildren<TextBlock>(wordCard)
-                            .FirstOrDefault(tb => tb.FontSize == 36 && tb.Foreground is SolidColorBrush brush && 
+                            .FirstOrDefault(tb => tb.FontSize == 36 && tb.Foreground is SolidColorBrush brush &&
                                          ((SolidColorBrush)tb.Foreground).Color.ToString() == "#FFD1434B");
-                        
+
                         // For pronunciation, find the TextBlock next to "Pronunciation: "
                         var pronunciationLabel = FindVisualChildren<TextBlock>(wordCard)
                             .FirstOrDefault(tb => tb.Text == "Pronunciation: ");
-                        var pronunciationBlock = pronunciationLabel != null && pronunciationLabel.Parent is StackPanel sp ? 
+                        var pronunciationBlock = pronunciationLabel != null && pronunciationLabel.Parent is StackPanel sp ?
                             sp.Children.OfType<TextBlock>().ElementAtOrDefault(1) : null;
-                        
+
                         // For definition, find the TextBlock after "Definition:"
                         var definitionLabel = FindVisualChildren<TextBlock>(wordCard)
                             .FirstOrDefault(tb => tb.Text == "Definition:");
-                        var definitionBlock = definitionLabel != null ? 
+                        var definitionBlock = definitionLabel != null ?
                             FindNextTextBlock(definitionLabel) : null;
-                        
+
                         // For examples, find the TextBlocks after "Example:"
                         var exampleLabel = FindVisualChildren<TextBlock>(wordCard)
                             .FirstOrDefault(tb => tb.Text == "Example:");
-                        var exampleBlock = exampleLabel != null ? 
+                        var exampleBlock = exampleLabel != null ?
                             FindNextTextBlock(exampleLabel) : null;
                         var uzbekExampleBlock = FindVisualChildren<TextBlock>(wordCard)
                             .FirstOrDefault(tb => tb.FontStyle == FontStyles.Italic);
-                        
+
                         // Update UI with current word
                         if (englishWordBlock != null) englishWordBlock.Text = currentWord.EnglishWord;
                         if (uzbekWordBlock != null) uzbekWordBlock.Text = currentWord.UzbekWord;
@@ -365,29 +360,29 @@ namespace PolyglotEssential.Page
                         if (definitionBlock != null) definitionBlock.Text = currentWord.Definition;
                         if (exampleBlock != null) exampleBlock.Text = currentWord.Example;
                         if (uzbekExampleBlock != null) uzbekExampleBlock.Text = currentWord.UzbekExample;
-                        
+
                         // Update progress information
                         // Find or create TextBlocks for level and progress
                         var levelTextBlock = FindVisualChildren<TextBlock>(this)
                             .FirstOrDefault(tb => tb.Name == "LevelText" || (tb.Text != null && tb.Text.StartsWith("LEVEL")));
-                        
+
                         var progressTextBlock = FindVisualChildren<TextBlock>(this)
                             .FirstOrDefault(tb => tb.Name == "ProgressText" || (tb.Text != null && tb.Text.Contains("/")));
-                        
+
                         if (levelTextBlock != null) levelTextBlock.Text = $"LEVEL {currentLevel}";
                         if (progressTextBlock != null) progressTextBlock.Text = $"{currentWordIndex + 1}/{totalWords}";
-                        
+
                         // Update progress bar if it exists
                         var progressBar = FindName("ProgressBar") as ProgressBar;
                         if (progressBar != null)
                         {
                             progressBar.Value = ((double)(currentWordIndex + 1) / totalWords) * 100;
                         }
-                        
+
                         // Handle button states
                         var prevButton = FindName("PreviousButton") as Button;
                         var nextButton = FindName("NextButton") as Button;
-                        
+
                         if (prevButton != null) prevButton.IsEnabled = currentWordIndex > 0;
                         if (nextButton != null) nextButton.IsEnabled = currentWordIndex < totalWords - 1;
                     }
@@ -400,13 +395,13 @@ namespace PolyglotEssential.Page
             // Animate word cards
             var cards = FindVisualChildren<Border>(this)
                 .Where(b => b.Style == FindResource("WordCardStyle")).ToList();
-            
+
             foreach (var card in cards)
             {
                 // Create a slide animation
                 var transform = new TranslateTransform();
                 card.RenderTransform = transform;
-                
+
                 DoubleAnimation slideInAnimation = new DoubleAnimation
                 {
                     From = goingForward ? 100 : -100,
@@ -414,7 +409,7 @@ namespace PolyglotEssential.Page
                     Duration = TimeSpan.FromMilliseconds(300),
                     EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
                 };
-                
+
                 // Create a fade animation
                 DoubleAnimation fadeAnimation = new DoubleAnimation
                 {
@@ -423,18 +418,18 @@ namespace PolyglotEssential.Page
                     Duration = TimeSpan.FromMilliseconds(300),
                     EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
                 };
-                
+
                 // Apply the animations
                 Storyboard storyboard = new Storyboard();
-                
+
                 Storyboard.SetTarget(slideInAnimation, card);
                 Storyboard.SetTargetProperty(slideInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
                 storyboard.Children.Add(slideInAnimation);
-                
+
                 Storyboard.SetTarget(fadeAnimation, card);
                 Storyboard.SetTargetProperty(fadeAnimation, new PropertyPath(UIElement.OpacityProperty));
                 storyboard.Children.Add(fadeAnimation);
-                
+
                 storyboard.Begin();
             }
         }
@@ -468,7 +463,7 @@ namespace PolyglotEssential.Page
 
             // Get the parent
             var parent = VisualTreeHelper.GetParent(current);
-            
+
             // If parent is a panel, try to find the next TextBlock
             if (parent is Panel panel)
             {
@@ -480,7 +475,7 @@ namespace PolyglotEssential.Page
                     {
                         if (panel.Children[i] is TextBlock tb)
                             return tb;
-                        
+
                         // Or look inside if it's a container
                         var nestedBlock = FindVisualChildren<TextBlock>(panel.Children[i]).FirstOrDefault();
                         if (nestedBlock != null)
@@ -488,7 +483,7 @@ namespace PolyglotEssential.Page
                     }
                 }
             }
-            
+
             // If not found, try siblings in the parent's parent
             var grandparent = parent != null ? VisualTreeHelper.GetParent(parent) : null;
             if (grandparent is Panel gpanel)
@@ -505,7 +500,7 @@ namespace PolyglotEssential.Page
                     }
                 }
             }
-            
+
             return null;
         }
     }

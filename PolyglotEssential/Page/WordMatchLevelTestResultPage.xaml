@@ -6,42 +6,46 @@
       xmlns:local="clr-namespace:PolyglotEssential.Desktop.Page"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="500"
-      Title="WordMatchLevelTestResultPage">
+      Title="WordMatchLevelTestResultPage"
+      Background="#F8F9FA">
 
     <Page.Resources>
         <Style x:Key="StatCardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="Margin" Value="0,0,24,0"/>
-            <Setter Property="Padding" Value="18,12"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <Setter Property="Padding" Value="20,16"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect BlurRadius="8" ShadowDepth="1" Opacity="0.10"/>
+                    <DropShadowEffect BlurRadius="12" ShadowDepth="2" Opacity="0.15"/>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="ResultCardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="20"/>
-            <Setter Property="Margin" Value="0,0,0,24"/>
-            <Setter Property="Padding" Value="22"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Padding" Value="24"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.12"/>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="3" Opacity="0.15"/>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="GreenText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#21BF73"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style x:Key="RedText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#D1434B"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style x:Key="PurpleText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#A084E8"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style x:Key="ResultButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="White"/>
@@ -49,7 +53,7 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="18,8"/>
+            <Setter Property="Padding" Value="20,10"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="#24284A"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -59,7 +63,7 @@
                         <Border Background="{TemplateBinding Background}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                CornerRadius="8">
+                                CornerRadius="12">
                             <Grid>
                                 <ContentPresenter HorizontalAlignment="Center" 
                                                   VerticalAlignment="Center"/>
@@ -82,87 +86,190 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="White" Width="500" Height="750">
-        <!-- Top Bar: Coin and Score -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,32,0,0">
-
-            <TextBlock Text="3" FontSize="28" Foreground="#FFD600" FontWeight="Bold" Margin="10,0,0,0"/>
-        </StackPanel>
-
-        <!-- Stat Cards Row -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,32,0,0">
-            <Border Style="{StaticResource StatCardStyle}" Height="581">
-                <StackPanel>
-                    <TextBlock Text="13 %" FontSize="18" Foreground="#A084E8" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Completion" FontSize="14" Foreground="#A084E8" HorizontalAlignment="Center"/>
+    <Grid>
+        <!-- Main Content -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24">
+                <!-- Header Section -->
+                <StackPanel Margin="0,24,0,32">
+                    <TextBlock Text="Test Results" 
+                             FontSize="28" 
+                             FontWeight="Bold" 
+                             Foreground="#24284A"
+                             HorizontalAlignment="Center"/>
+                    <TextBlock Text="Great job! Here's how you did" 
+                             FontSize="16" 
+                             Foreground="#666A7A"
+                             HorizontalAlignment="Center"
+                             Margin="0,8,0,0"/>
                 </StackPanel>
-            </Border>
-            <Border Style="{StaticResource StatCardStyle}" Height="572">
-                <StackPanel>
-                    <TextBlock Text="23" FontSize="18" Foreground="#24284A" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Total" FontSize="14" Foreground="#24284A" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Style="{StaticResource StatCardStyle}" Height="567">
-                <StackPanel>
-                    <TextBlock Text="3" FontSize="18" Foreground="#21BF73" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Correct" FontSize="14" Foreground="#21BF73" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Style="{StaticResource StatCardStyle}" Height="564">
-                <StackPanel>
-                    <TextBlock Text="20" FontSize="18" Foreground="#D1434B" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Wrong" FontSize="14" Foreground="#D1434B" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-        </StackPanel>
 
-        <!-- Rewards and OK Buttons -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="150,235,0,375" Width="221">
-            <Button Content="Rewards" Style="{StaticResource GreenButtonStyle}" Margin="0,0,16,0" Height="63" Width="140"/>
-            <Button Content="OK" Style="{StaticResource ResultButtonStyle}" Height="65" RenderTransformOrigin="-0.081,-0.412" Width="58"/>
-        </StackPanel>
+                <!-- Stats Grid -->
+                <Grid Margin="0,0,0,32">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-        <!-- Scrollable Results List -->
-        <ScrollViewer Margin="0,345,10,25">
-            <StackPanel>
-                <!-- Example Card 1 -->
-                <Border Style="{StaticResource ResultCardStyle}" Height="140">
-                    <StackPanel>
-                        <TextBlock Text="cruel" FontSize="20" Foreground="#24284A" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                            <TextBlock Text="shafqatsiz, berahm" Style="{StaticResource GreenText}"/>
-                            <TextBlock Text="  " Width="12"/>
-                            <TextBlock Text="aqlli, ziyrak" Style="{StaticResource RedText}"/>
+                    <!-- Completion -->
+                    <Border Grid.Column="0" Style="{StaticResource StatCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="13%" 
+                                     FontSize="24" 
+                                     Style="{StaticResource PurpleText}"
+                                     HorizontalAlignment="Center"/>
+                            <TextBlock Text="Completion" 
+                                     FontSize="14" 
+                                     Foreground="#666A7A"
+                                     HorizontalAlignment="Center"
+                                     Margin="0,4,0,0"/>
                         </StackPanel>
-                        <TextBlock Text="When someone is cruel, they do bad things to hurt others." Foreground="#666A7A" FontSize="15" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </Border>
-                <!-- Example Card 2 -->
-                <Border Style="{StaticResource ResultCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="angry" FontSize="20" Foreground="#24284A" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                            <TextBlock Text="jahli chiqqan, badjahl" Style="{StaticResource GreenText}"/>
-                            <TextBlock Text="  " Width="12"/>
-                            <TextBlock Text="qo'rqan, cho'chigan" Style="{StaticResource RedText}"/>
+                    </Border>
+
+                    <!-- Total -->
+                    <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="23" 
+                                     FontSize="24" 
+                                     Foreground="#24284A" 
+                                     FontWeight="Bold"
+                                     HorizontalAlignment="Center"/>
+                            <TextBlock Text="Total" 
+                                     FontSize="14" 
+                                     Foreground="#666A7A"
+                                     HorizontalAlignment="Center"
+                                     Margin="0,4,0,0"/>
                         </StackPanel>
-                        <TextBlock Text="When someone is angry, they may want to speak loudly or fight." Foreground="#666A7A" FontSize="15" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </Border>
-                <!-- Example Card 3 -->
-                <Border Style="{StaticResource ResultCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="reply" FontSize="20" Foreground="#24284A" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                            <TextBlock Text="javob bermoq" Style="{StaticResource GreenText}"/>
-                            <TextBlock Text="  " Width="12"/>
-                            <TextBlock Text="xavfsiz, bexatar" Style="{StaticResource RedText}"/>
+                    </Border>
+
+                    <!-- Correct -->
+                    <Border Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="3" 
+                                     FontSize="24" 
+                                     Style="{StaticResource GreenText}"
+                                     HorizontalAlignment="Center"/>
+                            <TextBlock Text="Correct" 
+                                     FontSize="14" 
+                                     Foreground="#666A7A"
+                                     HorizontalAlignment="Center"
+                                     Margin="0,4,0,0"/>
                         </StackPanel>
-                        <TextBlock Text="To reply is to give an answer or say back to someone." Foreground="#666A7A" FontSize="15" Margin="0,6,0,0"/>
-                    </StackPanel>
-                </Border>
-                <!-- Add more cards as needed -->
+                    </Border>
+
+                    <!-- Wrong -->
+                    <Border Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="20" 
+                                     FontSize="24" 
+                                     Style="{StaticResource RedText}"
+                                     HorizontalAlignment="Center"/>
+                            <TextBlock Text="Wrong" 
+                                     FontSize="14" 
+                                     Foreground="#666A7A"
+                                     HorizontalAlignment="Center"
+                                     Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Action Buttons -->
+                <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Center" 
+                          Margin="0,0,0,32">
+                    <Button Content="Rewards" 
+                            Style="{StaticResource GreenButtonStyle}" 
+                            Margin="0,0,16,0" 
+                            Height="56" 
+                            Width="160"
+                            Click="RewardsButton_Click"/>
+                    <Button Content="OK" 
+                            Style="{StaticResource ResultButtonStyle}" 
+                            Height="56" 
+                            Width="100"
+                            Click="OkButton_Click"/>
+                </StackPanel>
+
+                <!-- Results List -->
+                <TextBlock Text="Detailed Results" 
+                         FontSize="20" 
+                         FontWeight="Bold" 
+                         Foreground="#24284A"
+                         Margin="0,0,0,16"/>
+
+                <!-- Result Cards -->
+                <StackPanel>
+                    <!-- Example Card 1 -->
+                    <Border Style="{StaticResource ResultCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="cruel" 
+                                     FontSize="22" 
+                                     Foreground="#24284A" 
+                                     FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" 
+                                      Margin="0,8,0,0">
+                                <TextBlock Text="shafqatsiz, berahm" 
+                                         Style="{StaticResource GreenText}"/>
+                                <TextBlock Text="  " Width="12"/>
+                                <TextBlock Text="aqlli, ziyrak" 
+                                         Style="{StaticResource RedText}"/>
+                            </StackPanel>
+                            <TextBlock Text="When someone is cruel, they do bad things to hurt others." 
+                                     Foreground="#666A7A" 
+                                     FontSize="15" 
+                                     Margin="0,8,0,0"
+                                     TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Example Card 2 -->
+                    <Border Style="{StaticResource ResultCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="angry" 
+                                     FontSize="22" 
+                                     Foreground="#24284A" 
+                                     FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" 
+                                      Margin="0,8,0,0">
+                                <TextBlock Text="jahli chiqqan, badjahl" 
+                                         Style="{StaticResource GreenText}"/>
+                                <TextBlock Text="  " Width="12"/>
+                                <TextBlock Text="qo'rqan, cho'chigan" 
+                                         Style="{StaticResource RedText}"/>
+                            </StackPanel>
+                            <TextBlock Text="When someone is angry, they may want to speak loudly or fight." 
+                                     Foreground="#666A7A" 
+                                     FontSize="15" 
+                                     Margin="0,8,0,0"
+                                     TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Example Card 3 -->
+                    <Border Style="{StaticResource ResultCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="reply" 
+                                     FontSize="22" 
+                                     Foreground="#24284A" 
+                                     FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" 
+                                      Margin="0,8,0,0">
+                                <TextBlock Text="javob bermoq" 
+                                         Style="{StaticResource GreenText}"/>
+                                <TextBlock Text="  " Width="12"/>
+                                <TextBlock Text="xavfsiz, bexatar" 
+                                         Style="{StaticResource RedText}"/>
+                            </StackPanel>
+                            <TextBlock Text="To reply is to give an answer or say back to someone." 
+                                     Foreground="#666A7A" 
+                                     FontSize="15" 
+                                     Margin="0,8,0,0"
+                                     TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

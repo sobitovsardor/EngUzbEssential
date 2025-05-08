@@ -1,17 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 namespace PolyglotEssential.Page
@@ -65,7 +57,7 @@ namespace PolyglotEssential.Page
                 if (textBlock != null)
                 {
                     string levelText = textBlock.Text; // e.g., "Level 1"
-                    
+
                     // Extract level number
                     int levelNumber;
                     if (int.TryParse(levelText.Replace("Level ", ""), out levelNumber))
@@ -74,13 +66,13 @@ namespace PolyglotEssential.Page
                         {
                             // Create a new LearnWordPage and navigate to it
                             var learnWordPage = new LearnWordPage();
-                            
+
                             // Apply transition animation
                             NavigationService?.Navigate(learnWordPage);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"Error navigating to learning content: {ex.Message}", 
+                            MessageBox.Show($"Error navigating to learning content: {ex.Message}",
                                 "Navigation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
@@ -111,7 +103,7 @@ namespace PolyglotEssential.Page
                     ApplyAnimation(backButton, delay, AnimationType.SlideFromLeft);
                     delay += 50;
                 }
-                
+
                 // Animate Title
                 if (title != null)
                 {
@@ -132,7 +124,7 @@ namespace PolyglotEssential.Page
             {
                 System.Diagnostics.Debug.WriteLine($"LearnLevelPage animation error: {ex.Message}");
                 // Ensure elements are visible even if animation fails
-                Opacity = 1; 
+                Opacity = 1;
             }
         }
 
@@ -174,7 +166,8 @@ namespace PolyglotEssential.Page
                 transform.Y = 30;
                 DoubleAnimation slideAnimation = new DoubleAnimation
                 {
-                    From = 30, To = 0,
+                    From = 30,
+                    To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(500)),
                     BeginTime = TimeSpan.FromMilliseconds(delayMs),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
@@ -185,33 +178,35 @@ namespace PolyglotEssential.Page
             }
             else if (type == AnimationType.SlideFromLeft)
             {
-                 transform.X = -30;
-                 DoubleAnimation slideAnimation = new DoubleAnimation
-                 {
-                    From = -30, To = 0,
+                transform.X = -30;
+                DoubleAnimation slideAnimation = new DoubleAnimation
+                {
+                    From = -30,
+                    To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(500)),
                     BeginTime = TimeSpan.FromMilliseconds(delayMs),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-                 };
-                 Storyboard.SetTarget(slideAnimation, element);
-                 Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
-                 storyboard.Children.Add(slideAnimation);
+                };
+                Storyboard.SetTarget(slideAnimation, element);
+                Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+                storyboard.Children.Add(slideAnimation);
             }
             else if (type == AnimationType.SlideFromTop)
             {
-                 transform.Y = -20;
-                 DoubleAnimation slideAnimation = new DoubleAnimation
-                 {
-                    From = -20, To = 0,
+                transform.Y = -20;
+                DoubleAnimation slideAnimation = new DoubleAnimation
+                {
+                    From = -20,
+                    To = 0,
                     Duration = new Duration(TimeSpan.FromMilliseconds(500)),
                     BeginTime = TimeSpan.FromMilliseconds(delayMs),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-                 };
-                 Storyboard.SetTarget(slideAnimation, element);
-                 Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-                 storyboard.Children.Add(slideAnimation);
+                };
+                Storyboard.SetTarget(slideAnimation, element);
+                Storyboard.SetTargetProperty(slideAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+                storyboard.Children.Add(slideAnimation);
             }
-            
+
             storyboard.Begin();
         }
 

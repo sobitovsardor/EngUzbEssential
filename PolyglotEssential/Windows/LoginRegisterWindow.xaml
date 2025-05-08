@@ -279,7 +279,6 @@
                 <!-- Welcome Message -->
                 <StackPanel Grid.Row="0" Margin="0,10,0,20">
                     <TextBlock Text="Welcome Back" FontSize="28" FontWeight="Bold" Foreground="#1E293B"/>
-
                 </StackPanel>
 
                 <!-- Tab Buttons -->
@@ -412,6 +411,6 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-    </Grid>
+        </Grid>
     </Border>
 </Window>

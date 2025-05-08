@@ -1,8 +1,5 @@
-using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
-using System.Windows.Media;
 
 namespace PolyglotEssential.Desktop.Page
 {
@@ -15,7 +12,7 @@ namespace PolyglotEssential.Desktop.Page
         {
             InitializeComponent();
         }
-        
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (NavigationService.CanGoBack)
@@ -54,4 +51,4 @@ namespace PolyglotEssential.Desktop.Page
             MessageBox.Show("Translation Race game coming soon!", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-} 
+}

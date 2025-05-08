@@ -87,8 +87,8 @@
                                         <ImageBrush ImageSource="/Assets/Images/image1.jpg" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <TextBlock Text="Animals" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Match animal words" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Essential 1" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -100,8 +100,8 @@
                                         <ImageBrush ImageSource="/Assets/Images/image2.jpg" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <TextBlock Text="Food" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Match food words" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center" Height="26"><Run Text="Essential 2"/><LineBreak/><Run/></TextBlock>
+                                <TextBlock FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -113,8 +113,8 @@
                                         <ImageBrush ImageSource="/Assets/Images/image3.jpg" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <TextBlock Text="Colors" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Match color words" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center" Height="27"><Run Text="Essential 3"/><LineBreak/><Run/></TextBlock>
+                                <TextBlock FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -126,21 +126,21 @@
                                         <ImageBrush ImageSource="/Assets/Images/image4.jpg" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <TextBlock Text="Numbers" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Match number words" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center" Height="26"><Run Text="Essential 4"/><LineBreak/><Run/></TextBlock>
+                                <TextBlock FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"><Run/><LineBreak/><Run/></TextBlock>
                             </StackPanel>
                         </Button>
 
                         <!-- Button 5: Family -->
-                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CategoryButtonStyle}" Click="FamilyButton_Click">
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CategoryButtonStyle}" Click="FamilyButton_Click" Margin="15,15,15,15">
                             <StackPanel>
                                 <Border Width="120" Height="120" Margin="0,0,0,15" CornerRadius="60">
                                     <Border.Background>
                                         <ImageBrush ImageSource="/Assets/Images/image5.jpg" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <TextBlock Text="Family" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Match family words" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center" Height="27"><Run Text="Essential 5"/><LineBreak/><Run/></TextBlock>
+                                <TextBlock FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"><Run/><LineBreak/><Run/></TextBlock>
                             </StackPanel>
                         </Button>
 
@@ -152,8 +152,8 @@
                                         <ImageBrush ImageSource="/Assets/Images/image6.jpg" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <TextBlock Text="Weather" FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Match weather words" FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="#24284A" HorizontalAlignment="Center" Height="31"><Run Text="Essential 6"/><LineBreak/><Run/></TextBlock>
+                                <TextBlock FontSize="14" Foreground="#666A7A" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                     </Grid>

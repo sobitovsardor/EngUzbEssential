@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,7 +20,7 @@ namespace PolyglotEssential.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during LeaderboardPage initialization: {ex.Message}\n\nStack trace: {ex.StackTrace}", 
+                MessageBox.Show($"Error during LeaderboardPage initialization: {ex.Message}\n\nStack trace: {ex.StackTrace}",
                                "Critical Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -41,7 +40,7 @@ namespace PolyglotEssential.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during LeaderboardPage load: {ex.Message}", 
+                MessageBox.Show($"Error during LeaderboardPage load: {ex.Message}",
                               "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -54,7 +53,7 @@ namespace PolyglotEssential.Page
                 if (sender is RadioButton radioButton && radioButton.Tag != null)
                 {
                     string tabName = radioButton.Tag.ToString();
-                    
+
                     // Update current leaderboard and reload data
                     currentLeaderboard = tabName;
                     LoadLeaderboardData(currentLeaderboard);
@@ -70,7 +69,7 @@ namespace PolyglotEssential.Page
         {
             // In a real application, this would load data from a database or API
             // For now, we just have the static data defined in the XAML
-            
+
             // You could dynamically replace the entries in LeaderboardList based on the selected tab
             // For example:
             switch (leaderboardType)
@@ -79,12 +78,12 @@ namespace PolyglotEssential.Page
                     // Update displayed data for weekly leaderboard
                     // This would be implemented in a real application
                     break;
-                    
+
                 case "Monthly":
                     // Update displayed data for monthly leaderboard
                     // This would be implemented in a real application
                     break;
-                    
+
                 case "Overall":
                 default:
                     // Current default view is already the Overall leaderboard 
@@ -92,4 +91,4 @@ namespace PolyglotEssential.Page
             }
         }
     }
-} 
+}
