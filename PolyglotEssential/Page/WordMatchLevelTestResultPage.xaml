@@ -102,7 +102,7 @@
                              Foreground="#666A7A"
                              HorizontalAlignment="Center"
                              Margin="0,8,0,0"/>
-                </StackPanel>
+        </StackPanel>
 
                 <!-- Stats Grid -->
                 <Grid Margin="0,0,0,32">
@@ -115,7 +115,7 @@
 
                     <!-- Completion -->
                     <Border Grid.Column="0" Style="{StaticResource StatCardStyle}">
-                        <StackPanel>
+                <StackPanel>
                             <TextBlock Text="13%" 
                                      FontSize="24" 
                                      Style="{StaticResource PurpleText}"
@@ -125,12 +125,12 @@
                                      Foreground="#666A7A"
                                      HorizontalAlignment="Center"
                                      Margin="0,4,0,0"/>
-                        </StackPanel>
-                    </Border>
+                </StackPanel>
+            </Border>
 
                     <!-- Total -->
                     <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
-                        <StackPanel>
+                <StackPanel>
                             <TextBlock Text="23" 
                                      FontSize="24" 
                                      Foreground="#24284A" 
@@ -141,12 +141,12 @@
                                      Foreground="#666A7A"
                                      HorizontalAlignment="Center"
                                      Margin="0,4,0,0"/>
-                        </StackPanel>
-                    </Border>
+                </StackPanel>
+            </Border>
 
                     <!-- Correct -->
                     <Border Grid.Column="2" Style="{StaticResource StatCardStyle}">
-                        <StackPanel>
+                <StackPanel>
                             <TextBlock Text="3" 
                                      FontSize="24" 
                                      Style="{StaticResource GreenText}"
@@ -156,12 +156,12 @@
                                      Foreground="#666A7A"
                                      HorizontalAlignment="Center"
                                      Margin="0,4,0,0"/>
-                        </StackPanel>
-                    </Border>
+                </StackPanel>
+            </Border>
 
                     <!-- Wrong -->
                     <Border Grid.Column="3" Style="{StaticResource StatCardStyle}">
-                        <StackPanel>
+                <StackPanel>
                             <TextBlock Text="20" 
                                      FontSize="24" 
                                      Style="{StaticResource RedText}"
@@ -171,8 +171,8 @@
                                      Foreground="#666A7A"
                                      HorizontalAlignment="Center"
                                      Margin="0,4,0,0"/>
-                        </StackPanel>
-                    </Border>
+                </StackPanel>
+            </Border>
                 </Grid>
 
                 <!-- Action Buttons -->
@@ -190,7 +190,7 @@
                             Height="56" 
                             Width="100"
                             Click="OkButton_Click"/>
-                </StackPanel>
+        </StackPanel>
 
                 <!-- Results List -->
                 <TextBlock Text="Detailed Results" 
@@ -200,10 +200,10 @@
                          Margin="0,0,0,16"/>
 
                 <!-- Result Cards -->
-                <StackPanel>
-                    <!-- Example Card 1 -->
+            <StackPanel>
+                <!-- Example Card 1 -->
                     <Border Style="{StaticResource ResultCardStyle}">
-                        <StackPanel>
+                    <StackPanel>
                             <TextBlock Text="cruel" 
                                      FontSize="22" 
                                      Foreground="#24284A" 
@@ -212,21 +212,21 @@
                                       Margin="0,8,0,0">
                                 <TextBlock Text="shafqatsiz, berahm" 
                                          Style="{StaticResource GreenText}"/>
-                                <TextBlock Text="  " Width="12"/>
+                            <TextBlock Text="  " Width="12"/>
                                 <TextBlock Text="aqlli, ziyrak" 
                                          Style="{StaticResource RedText}"/>
-                            </StackPanel>
+                        </StackPanel>
                             <TextBlock Text="When someone is cruel, they do bad things to hurt others." 
                                      Foreground="#666A7A" 
                                      FontSize="15" 
                                      Margin="0,8,0,0"
                                      TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </Border>
+                    </StackPanel>
+                </Border>
 
-                    <!-- Example Card 2 -->
-                    <Border Style="{StaticResource ResultCardStyle}">
-                        <StackPanel>
+                <!-- Example Card 2 -->
+                <Border Style="{StaticResource ResultCardStyle}">
+                    <StackPanel>
                             <TextBlock Text="angry" 
                                      FontSize="22" 
                                      Foreground="#24284A" 
@@ -235,21 +235,21 @@
                                       Margin="0,8,0,0">
                                 <TextBlock Text="jahli chiqqan, badjahl" 
                                          Style="{StaticResource GreenText}"/>
-                                <TextBlock Text="  " Width="12"/>
+                            <TextBlock Text="  " Width="12"/>
                                 <TextBlock Text="qo'rqan, cho'chigan" 
                                          Style="{StaticResource RedText}"/>
-                            </StackPanel>
+                        </StackPanel>
                             <TextBlock Text="When someone is angry, they may want to speak loudly or fight." 
                                      Foreground="#666A7A" 
                                      FontSize="15" 
                                      Margin="0,8,0,0"
                                      TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </Border>
+                    </StackPanel>
+                </Border>
 
-                    <!-- Example Card 3 -->
-                    <Border Style="{StaticResource ResultCardStyle}">
-                        <StackPanel>
+                <!-- Example Card 3 -->
+                <Border Style="{StaticResource ResultCardStyle}">
+                    <StackPanel>
                             <TextBlock Text="reply" 
                                      FontSize="22" 
                                      Foreground="#24284A" 
@@ -258,7 +258,7 @@
                                       Margin="0,8,0,0">
                                 <TextBlock Text="javob bermoq" 
                                          Style="{StaticResource GreenText}"/>
-                                <TextBlock Text="  " Width="12"/>
+                            <TextBlock Text="  " Width="12"/>
                                 <TextBlock Text="xavfsiz, bexatar" 
                                          Style="{StaticResource RedText}"/>
                             </StackPanel>
@@ -269,7 +269,7 @@
                                      TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
-                </StackPanel>
+                    </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

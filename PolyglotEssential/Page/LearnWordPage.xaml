@@ -69,6 +69,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" Background="Transparent" BorderThickness="0" Cursor="Hand" Click="BackButton_Click">
@@ -83,6 +84,7 @@
 
                         <TextBlock Grid.Column="1" Text="LEARN WORDS" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" Width="330"/>
+
                     </Grid>
 
                     <!-- Progress information -->
@@ -95,17 +97,20 @@
                     </Grid>
 
                     <!-- Combined Word Card (Single Long Border) -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -113,9 +118,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <!-- English Word -->
-                                <TextBlock Grid.Column="0" Text="Happiness" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Happiness" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
                                           VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
 
                                 <!-- Arrow 1 -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
@@ -125,9 +136,15 @@
                                           VerticalAlignment="Center" Margin="0,0,5,0"/>
                                 </StackPanel>
 
-                                <!-- Uzbek Translation -->
-                                <TextBlock Grid.Column="2" Text="Baxt" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Счастье" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
                                           VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
 
                                 <!-- Arrow 2 -->
                                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
@@ -137,21 +154,16 @@
                                           VerticalAlignment="Center" Margin="0,0,5,0"/>
                                 </StackPanel>
 
-                                <!-- Listen Button -->
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" 
-                                        VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Listen" FontWeight="SemiBold"/>
-                                    </StackPanel>
-                                </Button>
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="Baxt" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
 
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
 
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
+                            <StackPanel Grid.Row="3">
                                 <!-- Pronunciation -->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
                                     <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
@@ -161,268 +173,674 @@
                                 <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="The state of being happy; a feeling of contentment, joy, or pleasure." 
+                                           FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Состояние счастья; чувство удовлетворения, радости или удовольствия." 
                                            FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
 
                                 <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Money can't buy happiness." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Pul baxtni sotib ololmaydi." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Деньги не могут купить счастье." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 2 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 2" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 2" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 2" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 2" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 2" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 3 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 3" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 3" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 3" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 3" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 3" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 4 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 4" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 4" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 4" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 4" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 4" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 5 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 5" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 5" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 5" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 5" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 5" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 6 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 6" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 6" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 6" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 6" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 6" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 7 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 7" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 7" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 7" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 7" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 7" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 8 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 8" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 8" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 8" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 8" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 8" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
                                 <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
@@ -431,72 +849,208 @@
                     </Border>
 
                     <!-- Duplicated Border 9 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 9" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 9" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 9" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 9" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 9" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 10 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 10" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 10" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 10" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 10" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 10" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
                                 <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
@@ -505,146 +1059,418 @@
                     </Border>
 
                     <!-- Duplicated Border 11 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 11" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 11" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 11" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 11" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 11" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 12 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 12" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 12" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 12" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 12" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 12" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 13 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 13" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 13" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 13" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 13" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 13" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 14 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 14" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 14" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 14" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 14" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 14" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
                                 <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
@@ -653,72 +1479,208 @@
                     </Border>
 
                     <!-- Duplicated Border 15 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 15" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 15" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 15" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 15" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 15" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 16 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 16" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 16" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 16" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 16" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 16" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
                                 <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
@@ -727,149 +1689,421 @@
                     </Border>
 
                     <!-- Duplicated Border 17 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 17" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 17" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 17" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 17" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 17" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 18 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 18" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 18" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 18" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 18" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 18" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 19 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 19" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 19" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 19" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 19" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 19" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Duplicated Border 20 -->
-                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="347" Margin="15,10,15,30">
+                    <Border Style="{StaticResource WordCardStyle}" HorizontalAlignment="Center" Height="377" Margin="15,10,15,30">
                         <Grid Margin="30,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!-- Top Row: English word ? Uzbek word ? Listen button -->
-                            <Grid Grid.Row="0" Margin="0,10,0,20">
+
+                            <!-- Language Selection ComboBox For First Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="0,-54,0,0">
+                                <ComboBoxItem Content="English" IsSelected="True"/>
+                                <ComboBoxItem Content="Russian"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Language Selection ComboBox For Second Word -->
+                            <ComboBox Grid.Row="0" Width="125" Height="30" HorizontalAlignment="Left"
+                                     Background="White" BorderBrush="#E2E8F0" BorderThickness="1" 
+                                     FontSize="14" FontWeight="SemiBold" Foreground="#24284A" VerticalAlignment="Top" Margin="296,-54,0,0">
+                                <ComboBoxItem Content="Russian" IsSelected="True"/>
+                                <ComboBoxItem Content="English"/>
+                                <ComboBoxItem Content="German"/>
+                            </ComboBox>
+
+                            <!-- Top Row: English word with listen ? Russian word with listen ? Uzbek word -->
+                            <Grid Grid.Row="1" Margin="0,10,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Word 20" FontSize="36" FontWeight="Bold" Foreground="#24284A" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <TextBlock Grid.Column="2" Text="So'z 20" FontSize="36" FontWeight="Bold" Foreground="#D1434B" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0"><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="5,0"/><Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" VerticalAlignment="Center" Margin="0,0,5,0"/></StackPanel>
-                                <Button Grid.Column="4" Style="{StaticResource ActionButtonStyle}" Width="120" Height="40" VerticalAlignment="Center"><StackPanel Orientation="Horizontal"><Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="Listen" FontWeight="SemiBold"/></StackPanel></Button>
+
+                                <!-- English Word with Listen Button -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Word 20" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#24284A" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 1 -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Russian Word with Listen Button -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Слово 20" FontSize="36" FontWeight="Bold" Foreground="#D1434B" 
+                                              VerticalAlignment="Center"/>
+                                    <Button Style="{StaticResource ActionButtonStyle}" Width="40" Height="40" 
+                                            Margin="10,0,0,0" Padding="0">
+                                        <Path Data="M8,5 L8,19 L19,12 Z" Fill="#D1434B" Stretch="Uniform" Width="15" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- Arrow 2 -->
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                    <Path Data="M0,0 L10,10 L0,20" Stroke="#666A7A" StrokeThickness="2" 
+                                          VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                </StackPanel>
+
+                                <!-- Uzbek Word -->
+                                <TextBlock Grid.Column="4" Text="So'z 20" FontSize="36" FontWeight="Bold" Foreground="#24284A" 
+                                          VerticalAlignment="Center"/>
                             </Grid>
+
                             <!-- Divider -->
-                            <Rectangle Grid.Row="1" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+                            <Rectangle Grid.Row="2" Height="1" Fill="#EEEEEE" Margin="0,0,0,20"/>
+
                             <!-- Description and Details -->
-                            <StackPanel Grid.Row="2">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/><TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/></StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <!-- Pronunciation -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <TextBlock Text="Pronunciation: " FontSize="16" FontWeight="SemiBold" Foreground="#24284A"/>
+                                    <TextBlock Text="/pronunciation/" FontSize="16" Foreground="#666A7A"/>
+                                </StackPanel>
+
+                                <!-- Definition -->
                                 <TextBlock Text="Definition:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
-                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                <TextBlock Text="Definition text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="Текст определения здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                <!-- Examples -->
                                 <TextBlock Text="Example:" FontSize="18" FontWeight="SemiBold" Foreground="#24284A" Margin="0,0,0,10"/>
                                 <TextBlock Text="Example text here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap"/>
-                                <TextBlock Text="Example translation here." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <TextBlock Text="Пример текста здесь." FontSize="16" Foreground="#666A7A" TextWrapping="Wrap" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
